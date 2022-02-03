@@ -2,20 +2,20 @@ package frc.robot;
 
 public class Constants {
 
-    public static int AXIS_FL_ID = 1;
-    public static int AXIS_BL_ID = 7;
-    public static int AXIS_FR_ID = 2;
-    public static int AXIS_BR_ID = 3;
+    public static int AXIS_FL_ID = 04;
+    public static int AXIS_BL_ID = 8;
+    public static int AXIS_FR_ID = 07;
+    public static int AXIS_BR_ID = 02;
 
-    public static int DRIVE_FL_ID = 0;
-    public static int DRIVE_BL_ID = 5;
-    public static int DRIVE_FR_ID = 6;
-    public static int DRIVE_BR_ID = 4;
+    public static int DRIVE_FL_ID = 03;
+    public static int DRIVE_BL_ID = 00;
+    public static int DRIVE_FR_ID = 05;
+    public static int DRIVE_BR_ID = 01;
 
-    public static int CODER_FL_ID = 11;
-    public static int CODER_BL_ID = 13;
-    public static int CODER_FR_ID = 10;
-    public static int CODER_BR_ID = 12;
+    public static int CODER_FL_ID = 00;
+    public static int CODER_BL_ID = 02;
+    public static int CODER_FR_ID = 03;
+    public static int CODER_BR_ID = 01;
 
     public static int INDEXER_ID = 20;
     public static double INDEXER_TARGET = 0.35;
@@ -60,8 +60,12 @@ public class Constants {
         public static int IR_PORT;
     }
 
+    public static class Intake {
+        public static int INTAKE_ID = 06;
+    }
+
     public static class Shooter {
-        public static int SHOOTER_ID;
+        public static int SHOOTER_ID = 51;
 
         public static double SHOOTER_LOWER_VEL = 1750.0;
         public static double SHOOTER_UPPER_VEL = 2250.0;

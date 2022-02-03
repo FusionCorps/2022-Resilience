@@ -15,7 +15,7 @@ public class RunShooter extends CommandBase {
     @Override
     public void execute() {
         // TODO: Make this limelight dependent
-        mShooter.setShooter(0.85);
+        mShooter.setShooter(0.10);
     }
 
     @Override

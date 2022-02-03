@@ -50,7 +50,7 @@ public class ChassisDriveAuton extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return  timer.hasPeriodPassed(mTime);
+        return  timer.hasElapsed(mTime);
     }
 
     @Override

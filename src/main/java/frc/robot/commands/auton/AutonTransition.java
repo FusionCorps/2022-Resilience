@@ -60,7 +60,7 @@ public class AutonTransition extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return  timer.hasPeriodPassed(mTime);
+        return  timer.hasElapsed(mTime);
     }
 
     @Override

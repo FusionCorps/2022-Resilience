@@ -29,7 +29,7 @@ public class SwerveCombo {
 
         this.coder = coderInit;
 
-        this.absEncDeg = (int) 0;
+        this.absEncDeg = coderInit.getAbsolutePosition();
 
         this.axisMotor = axisInit;
         this.axisMotor.setInverted(TalonFXInvertType.Clockwise);

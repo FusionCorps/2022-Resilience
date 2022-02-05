@@ -13,9 +13,9 @@ public class Constants {
     public static int DRIVE_BR_ID = 01;
 
     public static int CODER_FL_ID = 00;
-    public static int CODER_BL_ID = 02;
+    public static int CODER_BL_ID = 01;
     public static int CODER_FR_ID = 03;
-    public static int CODER_BR_ID = 01;
+    public static int CODER_BR_ID = 02;
 
     public static int INDEXER_ID = 20;
     public static double INDEXER_TARGET = 0.75;
@@ -56,7 +56,7 @@ public class Constants {
     }
 
     public static class Indexer {
-        public static int INDEXER_ID;
+        public static int INDEXER_ID = 20;
         public static int IR_PORT;
     }
 
@@ -67,8 +67,11 @@ public class Constants {
     public static class Shooter {
         public static int SHOOTER_ID = 51;
 
-        public static double SHOOTER_LOWER_VEL = 1750.0;
-        public static double SHOOTER_UPPER_VEL = 2250.0;
+        public static double SHOOTER_TARGET = 0.45;
+
+        public static double SHOOTER_LOWER_VEL = SHOOTER_TARGET*20000 - 500;
+        public static double SHOOTER_UPPER_VEL = SHOOTER_TARGET*20000 + 500;
+
     }
 
 }

@@ -101,7 +101,9 @@ public class Chassis extends SubsystemBase {
     
 
 
-    public void runSwerve(double fwd, double str, double rot) {
+    public void runSwerve(double fwd, double str, double rot_temp) {
+
+        double rot = -rot_temp;
 
         new SwerveCalcs(fwd, str, rot);
 

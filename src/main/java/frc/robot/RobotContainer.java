@@ -10,6 +10,7 @@ import frc.robot.commands.chassis.RunFieldCentricSwerve;
 import frc.robot.commands.chassis.ToggleAim;
 import frc.robot.commands.indexer.IndexerManage;
 import frc.robot.commands.intake.IntakeControl;
+import frc.robot.commands.shooter.IncrementSpeed;
 import frc.robot.commands.shooter.RunShooter;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Indexer;
@@ -47,6 +48,8 @@ public class RobotContainer {
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)
                 .whileHeld(new RunShooter(mShooter, mIndexer));
+        new JoystickButton(mController, XboxController.Button.kY.value)
+                .whenPressed(new IncrementSpeed(mShooter));
     }
 
 

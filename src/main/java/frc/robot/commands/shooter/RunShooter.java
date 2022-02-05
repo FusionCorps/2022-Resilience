@@ -20,7 +20,7 @@ public class RunShooter extends CommandBase {
     @Override
     public void execute() {
         // TODO: Make this limelight dependent
-        mShooter.setShooter(SHOOTER_TARGET);
+        mShooter.setShooter(mShooter.target);
         System.out.println(mShooter.isTarget());
 
         if (!mIndexer.break_beam.get() || mShooter.isTarget()) {

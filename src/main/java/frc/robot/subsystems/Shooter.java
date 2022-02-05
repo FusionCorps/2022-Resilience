@@ -11,9 +11,20 @@ public class Shooter extends SubsystemBase {
 
     WPI_TalonFX shooter0;
 
+    public double target;
+
+    public double min_vel;
+    public double max_vel;
+
     public Shooter() {
         shooter0 = new WPI_TalonFX(SHOOTER_ID);
         shooter0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+        target = SHOOTER_TARGET;
+
+        min_vel = SHOOTER_LOWER_VEL;
+        max_vel = SHOOTER_UPPER_VEL;
+
     }
 
     public void setShooter(double pct) {
@@ -26,7 +37,7 @@ public class Shooter extends SubsystemBase {
 
     public boolean isTarget() {
         double v = shooter0.getSelectedSensorVelocity();
-        return (v > SHOOTER_LOWER_VEL && v < SHOOTER_UPPER_VEL);
+        return (v > min_vel && v < max_vel);
     }
 
 }

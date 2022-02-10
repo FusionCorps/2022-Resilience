@@ -7,21 +7,28 @@ import frc.robot.subsystems.Shooter;
 public class IndexerManage extends CommandBase {
 
     Indexer mIndexer;
-    Shooter mShooter;
 
-    public IndexerManage(Indexer indexer, Shooter shooter) {
+
+    public IndexerManage(Indexer indexer) {
         mIndexer = indexer;
-        mShooter = shooter;
-        addRequirements(mIndexer, mShooter);
+        addRequirements(mIndexer);
+    }
+
+    @Override
+    public void initialize() {
+        mIndexer.configIndexer();
     }
 
     @Override
     public void execute() {
-        if (!mIndexer.break_beam.get() || mShooter.isTarget()) {
-            mIndexer.setIndexer(0.2);
+        if (mIndexer.break_beam.get()) {
+            mIndexer.setIndexer(-0.2);
         } else {
-            mIndexer.setIndexer(0.0);
+            mIndexer.setIndexerVel(0);
         }
+
+
+
     }
 
 }

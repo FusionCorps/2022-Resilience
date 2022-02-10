@@ -20,8 +20,8 @@ public class IncrementSpeed extends InstantCommand {
 
         System.out.println(mShooter.target);
 
-        mShooter.min_vel = mShooter.target*20000 - 500;
-        mShooter.max_vel = mShooter.target*20000 + 500;
+        mShooter.min_vel = mShooter.target*20000 - 150;
+        mShooter.max_vel = mShooter.target*20000 + 150;
 
     }
 

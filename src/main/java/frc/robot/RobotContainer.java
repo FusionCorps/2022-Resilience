@@ -34,6 +34,7 @@ public class RobotContainer {
 
         mChassis.setDefaultCommand(new RunFieldCentricSwerve(mChassis));
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
+        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
 
     }
 

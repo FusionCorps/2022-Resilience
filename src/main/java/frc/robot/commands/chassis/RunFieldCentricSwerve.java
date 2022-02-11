@@ -83,7 +83,7 @@ public class RunFieldCentricSwerve extends CommandBase {
             } catch (Exception e) {
             }
 
-            System.out.println("tx: " + tx);
+//            System.out.println("tx: " + tx);
 
         } else {
             try {

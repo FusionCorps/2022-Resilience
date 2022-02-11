@@ -8,6 +8,7 @@ import frc.robot.commands.chassis.FieldCentricRecord;
 import frc.robot.commands.chassis.ResetGyro;
 import frc.robot.commands.chassis.RunFieldCentricSwerve;
 import frc.robot.commands.chassis.ToggleAim;
+import frc.robot.commands.indexer.IndexerBurst;
 import frc.robot.commands.indexer.IndexerManage;
 import frc.robot.commands.intake.IntakeControl;
 import frc.robot.commands.shooter.IncrementSpeed;
@@ -34,7 +35,7 @@ public class RobotContainer {
 
         mChassis.setDefaultCommand(new RunFieldCentricSwerve(mChassis));
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
-        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
+//        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
 
     }
 
@@ -48,9 +49,11 @@ public class RobotContainer {
         new JoystickButton(mController, XboxController.Button.kRightBumper.value)
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)
-                .whileHeld(new RunShooter(mShooter, mIndexer));
+                .whileHeld(new RunShooter(mShooter, mIndexer, mChassis));
         new JoystickButton(mController, XboxController.Button.kY.value)
                 .whenPressed(new IncrementSpeed(mShooter));
+        new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
+                .whenPressed(new IndexerBurst(mIndexer, 0.19));
     }
 
 

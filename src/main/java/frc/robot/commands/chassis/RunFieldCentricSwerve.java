@@ -75,6 +75,8 @@ public class RunFieldCentricSwerve extends CommandBase {
         if (mChassis.aiming) {
             tx = mChassis.limelightTable.getEntry("tx").getDouble(0.0);
 
+            tx = tx - 27.4*(strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))));
+
             if (abs(tx) <= 0.5) {
                 tx = 0;
             }
@@ -91,7 +93,7 @@ public class RunFieldCentricSwerve extends CommandBase {
 
             try {
                 mChassis.runSwerve(speed_K*fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
-                        speed_K*strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
+                        strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
                         0.0365*tx + (tx/(abs(tx)+0.02))*0.012);
             } catch (Exception e) {
             }

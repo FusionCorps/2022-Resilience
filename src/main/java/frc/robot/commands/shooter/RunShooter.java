@@ -10,8 +10,7 @@ import frc.robot.subsystems.Shooter;
 
 import static frc.robot.Constants.Shooter.SHOOTER_TARGET;
 import static frc.robot.RobotContainer.mController;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
+import static java.lang.Math.*;
 import static java.lang.StrictMath.PI;
 
 public class RunShooter extends CommandBase {
@@ -42,11 +41,16 @@ public class RunShooter extends CommandBase {
          double angle = mChassis.ahrs.getAngle();
 
         double fwd = fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI)));
+        double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
         if (ty <= 7.0 ) {
 //            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
-            double temp = 0.49 - 0.009*ty;
+            // double temp = 0.49 - 0.009*ty; if battery low
+
+            // TODO: write code dependent on voltage instead
+
+            double temp = 0.485 - 0.009*ty + 0.015*abs(str);
             mShooter.target = (temp % 1);
 
             mShooter.min_vel = mShooter.target*20000 - 300;
@@ -56,7 +60,7 @@ public class RunShooter extends CommandBase {
         }
 
         mShooter.setShooter(mShooter.target);
-        System.out.println(mShooter.isTarget());
+
 
 
         if (mShooter.isShooting()) {
@@ -67,6 +71,7 @@ public class RunShooter extends CommandBase {
 
         if (mShooter.isTarget()) {
             mIndexer.setIndexer(-0.3);
+            System.out.println(str);
         } else {
             mIndexer.setIndexer(0.0);
         }

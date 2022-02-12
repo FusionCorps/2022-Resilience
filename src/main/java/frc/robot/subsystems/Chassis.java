@@ -24,6 +24,7 @@ public class Chassis extends SubsystemBase {
     public FileWriter chassisWriter;
 
     public boolean aiming = false;
+    public boolean shooting = false;
 
     public NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
@@ -49,6 +50,8 @@ public class Chassis extends SubsystemBase {
     public SwerveCombo comboBR;
 
     public static AHRS ahrs;
+
+
 
 
 

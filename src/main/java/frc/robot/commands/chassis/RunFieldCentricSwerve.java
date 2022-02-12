@@ -4,6 +4,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.math.SigmoidGenerator;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Shooter;
 
 import static frc.robot.RobotContainer.mController;
 import static java.lang.Math.*;
@@ -13,11 +14,13 @@ public class RunFieldCentricSwerve extends CommandBase {
 
     Chassis mChassis;
 
+
     double tx = 0;
     double tx_prev = 0;
 
     public RunFieldCentricSwerve(Chassis chassis) {
         mChassis = chassis;
+
         this.addRequirements(mChassis);
     }
 
@@ -76,9 +79,19 @@ public class RunFieldCentricSwerve extends CommandBase {
                 tx = 0;
             }
 
+            double speed_K;
+
+            if (mChassis.shooting) {
+                speed_K = 0.00;
+            } else {
+                speed_K = 1.0;
+            }
+
+
+
             try {
-                mChassis.runSwerve(fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
-                        strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
+                mChassis.runSwerve(speed_K*fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
+                        speed_K*strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
                         0.0365*tx + (tx/(abs(tx)+0.02))*0.012);
             } catch (Exception e) {
             }

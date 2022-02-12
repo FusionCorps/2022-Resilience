@@ -44,22 +44,29 @@ public class RunShooter extends CommandBase {
         double fwd = fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
-        if (ty <= 5.0 ) {
+        if (ty <= 7.0 ) {
 //            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
-            double temp = 0.48 - 0.0085*ty;
+            double temp = 0.49 - 0.009*ty;
             mShooter.target = (temp % 1);
 
-            mShooter.min_vel = mShooter.target*20000 - 150;
-            mShooter.max_vel = mShooter.target*20000 + 150;
+            mShooter.min_vel = mShooter.target*20000 - 300;
+            mShooter.max_vel = mShooter.target*20000 + 300;
 
-            System.out.println(0.5*fwd);
+
         }
 
         mShooter.setShooter(mShooter.target);
+        System.out.println(mShooter.isTarget());
 
+
+        if (mShooter.isShooting()) {
+            mChassis.shooting = true;
+        } else {
+            mChassis.shooting = false;
+        }
 
         if (mShooter.isTarget()) {
-            mIndexer.setIndexer(-0.2);
+            mIndexer.setIndexer(-0.3);
         } else {
             mIndexer.setIndexer(0.0);
         }
@@ -72,6 +79,7 @@ public class RunShooter extends CommandBase {
     public void end(boolean isFinished) {
         mShooter.setShooter(0.0);
         mIndexer.setIndexer(0.0);
+        mChassis.shooting = false;
     }
 
 }

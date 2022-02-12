@@ -22,9 +22,10 @@ public class IndexerManage extends CommandBase {
     @Override
     public void execute() {
         if (mIndexer.break_beam.get()) {
-            mIndexer.setIndexer(-0.2);
+            mIndexer.setIndexer(-0.0);
         } else {
             mIndexer.setIndexerVel(0);
+            System.out.println("ball top");
         }
 
 

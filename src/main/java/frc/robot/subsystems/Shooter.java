@@ -40,4 +40,9 @@ public class Shooter extends SubsystemBase {
         return (v > min_vel && v < max_vel);
     }
 
+    public boolean isShooting() {
+        double v = shooter0.getSelectedSensorVelocity();
+        return (v > (target*20000 - 2000) && v < (target*20000 + 2000));
+    }
+
 }

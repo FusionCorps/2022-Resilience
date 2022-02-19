@@ -96,7 +96,11 @@ public class Chassis extends SubsystemBase {
         retString += ahrs.getRawAccelZ() + ",";
         retString += ahrs.getPitch() + ",";
         retString += ahrs.getRoll() + ",";
-        retString += ahrs.getYaw();
+        retString += ahrs.getYaw() + ",";
+
+        retString += ahrs.getDisplacementX() + ",";
+        retString += ahrs.getDisplacementY() + ",";
+        retString += ahrs.getDisplacementZ();
 
         return retString;
 
@@ -195,6 +199,8 @@ public class Chassis extends SubsystemBase {
         ret_string += axis1.getMotorOutputPercent() + ",";
         ret_string += axis2.getMotorOutputPercent() + ",";
         ret_string += axis3.getMotorOutputPercent();
+
+
 
         return  ret_string;
     }

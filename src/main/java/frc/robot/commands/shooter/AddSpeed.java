@@ -15,6 +15,7 @@ public class AddSpeed extends InstantCommand {
     @Override
     public void initialize() {
         mShooter.shootK += 0.025;
+        mShooter.shootKTab.setDouble(mShooter.shootK);
     }
 
 }

@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.Shooter.*;
@@ -17,6 +20,11 @@ public class Shooter extends SubsystemBase {
 
     public double min_vel;
     public double max_vel;
+
+    private ShuffleboardTab tab = Shuffleboard.getTab("General");
+    public NetworkTableEntry shootKTab =
+            tab.add("shootK", 1.0)
+                    .getEntry();
 
     public Shooter() {
         shooter0 = new WPI_TalonFX(SHOOTER_ID);

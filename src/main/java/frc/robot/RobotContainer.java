@@ -12,7 +12,9 @@ import frc.robot.commands.climb.ClimbManage;
 import frc.robot.commands.indexer.IndexerBurst;
 import frc.robot.commands.indexer.IndexerManage;
 import frc.robot.commands.intake.IntakeControl;
+import frc.robot.commands.shooter.AddSpeed;
 import frc.robot.commands.shooter.IncrementSpeed;
+import frc.robot.commands.shooter.MinusSpeed;
 import frc.robot.commands.shooter.RunShooter;
 import frc.robot.subsystems.*;
 
@@ -56,6 +58,10 @@ public class RobotContainer {
                 .whenPressed(new IndexerBurst(mIndexer, 0.22));
         new JoystickButton(mController, XboxController.Button.kRightBumper.value)
                 .whileHeld(new ClimbManage(mClimb));
+        new JoystickButton(mController, XboxController.Button.kStart.value)
+                .whenPressed(new AddSpeed(mShooter));
+        new JoystickButton(mController, XboxController.Button.kBack.value)
+                .whenPressed(new MinusSpeed(mShooter));
     }
 
 

@@ -44,6 +44,8 @@ public class RunShooter extends CommandBase {
         double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
+        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
+
         if (ty <= 7.0 ) {
 //            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
             // double temp = 0.49 - 0.009*ty; if battery low

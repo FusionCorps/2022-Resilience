@@ -21,6 +21,7 @@ public class ResetGyro extends InstantCommand {
     public void initialize() {
         System.out.println("Trying to Reset");
         cChassis.ahrs.reset();
+        cChassis.ahrs.resetDisplacement();
     }
 
 

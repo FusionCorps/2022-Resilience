@@ -1,9 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,6 +17,12 @@ public class Climb extends SubsystemBase {
         climb1 = new WPI_TalonFX(Constants.Climb.CLIMB_1_ID);
 
         climb0.setInverted(TalonFXInvertType.Clockwise);
+
+        SupplyCurrentLimitConfiguration limits =
+            new SupplyCurrentLimitConfiguration(true, 30., 30, 0.25);
+
+        climb0.configSupplyCurrentLimit(limits);
+        climb1.configSupplyCurrentLimit(limits);
 
         climb1.follow(climb0);
         climb1.setInverted(InvertType.FollowMaster);

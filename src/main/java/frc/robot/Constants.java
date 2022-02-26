@@ -53,10 +53,10 @@ public class Constants {
         public static double CLIMB_kI = 0.0;
         public static double CLIMB_kD = 0.30;
 
-        public static double CLIMB_MIN_POS = 2048;
-        public static double CLIMB_LOWER_POS = 2048*5;
-        public static double CLIMB_UPPER_POS = 2048*15;
-        public static double CLIMB_MAX_POS = 2048*20;
+        public static double CLIMB_MIN_POS = -2048*140;
+        public static double CLIMB_LOWER_POS = -2048*120;
+        public static double CLIMB_UPPER_POS = -2048*5;
+        public static double CLIMB_MAX_POS = -2048*0.5;
 
     }
 

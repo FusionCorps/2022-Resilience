@@ -19,11 +19,17 @@ public class ClimbActivate extends CommandBase {
         int key = mClimb.getClimbPosKey();
 
         if (key == 0) {
-            mClimb.setClimbPos(CLIMB_MIN_POS + 256);
+            mClimb.setClimbPos(0.1);
         } else {
-            mClimb.setClimb(-0.1);
+            mClimb.setClimb(-0.3);
         }
 
+    }
+
+    @Override
+    public void end(boolean isFinished) {
+        mClimb.setClimb(0.0);
+        System.out.println("Climb Ended");
     }
 
 }

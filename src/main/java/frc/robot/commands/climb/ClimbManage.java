@@ -24,15 +24,15 @@ public class ClimbManage extends CommandBase {
 
         if (key == 0) {
             // TODO: is this how I should handle this
-            mClimb.setClimbPos(CLIMB_MIN_POS + 256);
+            mClimb.setClimb(0.1);
         } else if (key == 1) {
-            mClimb.setClimb(0.05);
+            mClimb.setClimb(0.5);
         } else if (key == 2) {
-            mClimb.setClimb(0.0);
+            mClimb.setClimb(0.5);
         } else if (key == 3) {
-            mClimb.setClimb(0.05);
+            mClimb.setClimb(0.5);
         } else {
-            mClimb.setClimbPos(CLIMB_MAX_POS + 256);
+            mClimb.setClimb(0.05);
         }
 
     }

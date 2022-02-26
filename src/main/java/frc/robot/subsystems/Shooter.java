@@ -11,6 +11,8 @@ public class Shooter extends SubsystemBase {
 
     WPI_TalonFX shooter0;
 
+    public double shootK;
+
     public double target;
 
     public double min_vel;
@@ -21,6 +23,8 @@ public class Shooter extends SubsystemBase {
         shooter0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
         target = SHOOTER_TARGET;
+
+        shootK = 1.0;
 
         min_vel = SHOOTER_LOWER_VEL;
         max_vel = SHOOTER_UPPER_VEL;

@@ -18,8 +18,9 @@ public class ClimbActivate extends CommandBase {
     public void execute() {
         int key = mClimb.getClimbPosKey();
 
+
         if (key == 0) {
-            mClimb.setClimbPos(0.1);
+            mClimb.setClimb(0.1);
         } else {
             mClimb.setClimb(-0.3);
         }

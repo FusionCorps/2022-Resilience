@@ -22,17 +22,22 @@ public class ClimbManage extends CommandBase {
         int key;
         key = mClimb.getClimbPosKey();
 
-        if (key == 0) {
-            // TODO: is this how I should handle this
-            mClimb.setClimb(0.1);
-        } else if (key == 1) {
-            mClimb.setClimb(0.5);
-        } else if (key == 2) {
-            mClimb.setClimb(0.5);
-        } else if (key == 3) {
-            mClimb.setClimb(0.5);
+
+        if (mClimb.isPause) {
+            mClimb.setClimb(0.0);
         } else {
-            mClimb.setClimb(0.05);
+            if (key == 0) {
+                // TODO: is this how I should handle this
+                mClimb.setClimb(0.1);
+            } else if (key == 1) {
+                mClimb.setClimb(0.5);
+            } else if (key == 2) {
+                mClimb.setClimb(0.5);
+            } else if (key == 3) {
+                mClimb.setClimb(0.5);
+            } else {
+                mClimb.setClimbPos(CLIMB_MAX_POS + 0.25*2048);
+            }
         }
 
     }

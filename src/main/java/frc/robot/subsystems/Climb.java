@@ -12,6 +12,8 @@ public class Climb extends SubsystemBase {
     WPI_TalonFX climb0;
     WPI_TalonFX climb1;
 
+    public boolean isPause = false;
+
     public Climb() {
         climb0 = new WPI_TalonFX(Constants.Climb.CLIMB_0_ID);
         climb1 = new WPI_TalonFX(Constants.Climb.CLIMB_1_ID);
@@ -27,8 +29,8 @@ public class Climb extends SubsystemBase {
         climb1.follow(climb0);
         climb1.setInverted(InvertType.FollowMaster);
 
-        climb0.setNeutralMode(NeutralMode.Coast);
-        climb1.setNeutralMode(NeutralMode.Coast);
+        climb0.setNeutralMode(NeutralMode.Brake);
+        climb1.setNeutralMode(NeutralMode.Brake);
 
         climb0.setSelectedSensorPosition(0);
 

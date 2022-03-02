@@ -43,7 +43,7 @@ public class RunFieldCentricSwerve extends CommandBase {
     @Override
     public void execute() {
 
-        angle = -(mChassis.ahrs.getAngle() % 360) + 180;
+        angle = -(mChassis.ahrs.getAngle() % 360);
 
 
 
@@ -77,7 +77,7 @@ public class RunFieldCentricSwerve extends CommandBase {
 
             tx = tx - 27.4*(strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))));
 
-            if (abs(tx) <= 0.5) {
+            if (abs(tx) <= 0.8) {
                 tx = 0;
             }
 
@@ -94,7 +94,7 @@ public class RunFieldCentricSwerve extends CommandBase {
             try {
                 mChassis.runSwerve(speed_K*fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
                         strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
-                        0.0365*tx + (tx/(abs(tx)+0.02))*0.012);
+                        0.0135*tx + (tx/(abs(tx)+0.02))*0.006);
             } catch (Exception e) {
             }
 

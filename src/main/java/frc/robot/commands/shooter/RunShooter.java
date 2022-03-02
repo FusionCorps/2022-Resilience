@@ -52,7 +52,8 @@ public class RunShooter extends CommandBase {
 
             // TODO: write code dependent on voltage instead
 
-            double temp = 0.485 - 0.009*ty + 0.015*abs(str);
+            double temp = 0.485 - 0.012*ty + 0.015*abs(str);
+//            double temp = 0.485;
             mShooter.target = mShooter.shootK*(temp % 1);
 
             mShooter.min_vel = mShooter.target*20000 - 300;

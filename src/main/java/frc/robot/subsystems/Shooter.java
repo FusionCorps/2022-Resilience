@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -29,6 +30,8 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         shooter0 = new WPI_TalonFX(SHOOTER_ID);
         shooter0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+        shooter0.setInverted(TalonFXInvertType.Clockwise);
 
         target = SHOOTER_TARGET;
 

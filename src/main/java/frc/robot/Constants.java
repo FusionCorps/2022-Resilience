@@ -61,7 +61,7 @@ public class Constants {
 
     public static class Indexer {
         public static int INDEXER_ID = 51;
-        public static int IR_PORT = 1;
+        public static int IR_PORT = 0;
     }
 
     public static class Intake {

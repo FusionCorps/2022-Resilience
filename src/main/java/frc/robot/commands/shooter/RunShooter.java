@@ -52,12 +52,19 @@ public class RunShooter extends CommandBase {
 
             // TODO: write code dependent on voltage instead
 
-            double temp = 0.485 - 0.012*ty + 0.015*abs(str);
-//            double temp = 0.485;
-            mShooter.target = mShooter.shootK*(temp % 1);
 
-            mShooter.min_vel = mShooter.target*20000 - 300;
-            mShooter.max_vel = mShooter.target*20000 + 300;
+            // shoot k 0.95 above 1.00 below
+
+            double v_calc = 0.487 - 0.0082 * ty + 0.015 * abs(str);
+            double temp;
+            if (ty > 2.0) {
+                v_calc = 0.475;
+            }
+//            double temp = 0.485;
+            mShooter.target = mShooter.shootK*(v_calc % 1);
+
+            mShooter.min_vel = mShooter.target*21000 - 300;
+            mShooter.max_vel = mShooter.target*21000 + 450;
 
 
         }
@@ -73,7 +80,7 @@ public class RunShooter extends CommandBase {
         }
 
         if (mShooter.isTarget()) {
-            mIndexer.setIndexer(-0.3);
+            mIndexer.setIndexer(-0.17);
             System.out.println(str);
         } else {
             mIndexer.setIndexer(0.0);

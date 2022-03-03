@@ -57,7 +57,7 @@ public class RobotContainer {
         new JoystickButton(mController, XboxController.Button.kY.value)
                 .whenPressed(new IncrementSpeed(mShooter));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
-                .whenPressed(new IndexerBurst(mIndexer, 0.22));
+                .whenPressed(new IndexerBurst(mIndexer, 0.20));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)
 //                .whileHeld(new ClimbManage(mClimb));
         new JoystickButton(mController, XboxController.Button.kStart.value)

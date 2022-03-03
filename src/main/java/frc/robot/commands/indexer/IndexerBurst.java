@@ -36,7 +36,7 @@ public class IndexerBurst extends CommandBase {
     @Override
     public void execute() {
 
-        mIndexer.setIndexer(-0.2);
+        mIndexer.setIndexer(-0.18);
 
     }
 

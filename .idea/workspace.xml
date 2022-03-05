@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf733cc5-9415-40d8-9104-c75dfb02ce65" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/intake/RunIntakeTimed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RunShooterTimed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RunShooterVelocity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/chassis/RunFieldCentricSwerve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/chassis/RunFieldCentricSwerve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/AddSpeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/AddSpeed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/MinusSpeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/MinusSpeed.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RunShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RunShooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Climb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Climb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Shooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Shooter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,6 +8,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import static frc.robot.Constants.Shooter.*;
 
@@ -18,6 +19,7 @@ public class Shooter extends SubsystemBase {
     public double shootK;
 
     public double target;
+    public double target_velocity;
 
     public double min_vel;
     public double max_vel;
@@ -28,22 +30,33 @@ public class Shooter extends SubsystemBase {
                     .getEntry();
 
     public Shooter() {
-        shooter0 = new WPI_TalonFX(SHOOTER_ID);
+        shooter0 = new WPI_TalonFX(Constants.Shooter.SHOOTER_ID);
         shooter0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+        shooter0.config_kF(0, SHOOTER_kF);
+        shooter0.config_kP(0, SHOOTER_kP);
+        shooter0.config_kI(0, SHOOTER_kI);
+        shooter0.config_kD(0, SHOOTER_kD);
 
         shooter0.setInverted(TalonFXInvertType.Clockwise);
 
-        target = SHOOTER_TARGET;
+        target = Constants.Shooter.SHOOTER_TARGET;
+        target_velocity = Constants.Shooter.SHOOTER_TARGET * 21000;
+
 
         shootK = 1.0;
 
-        min_vel = SHOOTER_LOWER_VEL;
-        max_vel = SHOOTER_UPPER_VEL;
+        min_vel = Constants.Shooter.SHOOTER_LOWER_VEL;
+        max_vel = Constants.Shooter.SHOOTER_UPPER_VEL;
 
     }
 
     public void setShooter(double pct) {
         shooter0.set(pct);
+    }
+
+    public void setShooterVelocity(double vel) {
+        shooter0.set(TalonFXControlMode.Velocity, vel);
     }
 
     public double getShooterVel() {

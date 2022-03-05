@@ -81,6 +81,9 @@ public class Constants {
         public static double SHOOTER_kI = 0.0;
         public static double SHOOTER_kD = 0.0;
 
+        public static double SHOOTER_MAX_V = 21000;
+        public static double SHOOTER_MIN_V = 500;
+
     }
 
 }

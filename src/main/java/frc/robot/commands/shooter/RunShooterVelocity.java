@@ -8,6 +8,8 @@ import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
+import static frc.robot.Constants.Shooter.SHOOTER_MAX_V;
+import static frc.robot.Constants.Shooter.SHOOTER_MIN_V;
 import static frc.robot.RobotContainer.mController;
 import static java.lang.Math.*;
 import static java.lang.Math.pow;
@@ -59,6 +61,12 @@ public class RunShooterVelocity extends CommandBase {
         double v_calc = 21500 * (0.466 - 0.00403 * ty + 0.000331*pow(ty, 2) - 0.0000213*pow(ty, 3));
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
+
+        if (mShooter.target_velocity > SHOOTER_MAX_V) {
+            mShooter.target_velocity = SHOOTER_MAX_V;
+        } else if (mShooter.target_velocity < SHOOTER_MIN_V) {
+            mShooter.target_velocity = SHOOTER_MIN_V;
+        }
 
         mShooter.min_vel = mShooter.target_velocity - 150;
         mShooter.max_vel = mShooter.target_velocity + 150;

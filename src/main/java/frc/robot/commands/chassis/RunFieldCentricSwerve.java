@@ -53,11 +53,15 @@ public class RunFieldCentricSwerve extends CommandBase {
 
         double axis0 = mController.getRawAxis(0);
         double axis1 = mController.getRawAxis(1);
-        double axis4 = -mController.getRawAxis(4);
+        double axis4 = mController.getRawAxis(4);
 
         if (axis0*axis0 + axis1*axis1 <= 0.0049) {
             axis0 = 0;
             axis1 = 0;
+        }
+
+        if (abs(axis4) <= 0.035) {
+            axis4 = 0;
         }
 
 
@@ -104,7 +108,7 @@ public class RunFieldCentricSwerve extends CommandBase {
             try {
                 mChassis.runSwerve(fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
                         strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
-                        rotLimiter.calculate(mController.getRawAxis(4)));
+                        rotLimiter.calculate(axis4));
             } catch (Exception e) {
             }
 

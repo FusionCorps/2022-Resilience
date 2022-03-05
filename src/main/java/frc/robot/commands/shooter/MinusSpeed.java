@@ -14,6 +14,7 @@ public class MinusSpeed extends InstantCommand {
 
     @Override
     public void initialize() {
+        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
         mShooter.shootK -= 0.025;
         mShooter.shootKTab.setDouble(mShooter.shootK);
     }

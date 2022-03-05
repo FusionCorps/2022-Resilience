@@ -12,7 +12,7 @@ public class Climb extends SubsystemBase {
     WPI_TalonFX climb0;
     WPI_TalonFX climb1;
 
-    public boolean isPause = false;
+    public boolean isPause = true;
 
     public Climb() {
         climb0 = new WPI_TalonFX(Constants.Climb.CLIMB_0_ID);

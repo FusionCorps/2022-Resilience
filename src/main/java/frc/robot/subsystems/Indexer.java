@@ -16,9 +16,12 @@ public class Indexer extends SubsystemBase {
     WPI_TalonFX indexer0;
     public DigitalInput break_beam;
 
+    public boolean isAutomated = true;
+
     public Indexer() {
         indexer0 = new WPI_TalonFX(INDEXER_ID);
         break_beam = new DigitalInput(IR_PORT);
+
         indexer0.setNeutralMode(NeutralMode.Brake);
 
         indexer0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);

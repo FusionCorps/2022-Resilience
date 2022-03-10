@@ -76,8 +76,8 @@ public class Constants {
         public static double SHOOTER_LOWER_VEL = SHOOTER_TARGET*20000 - 500;
         public static double SHOOTER_UPPER_VEL = SHOOTER_TARGET*20000 + 500;
 
-        public static double SHOOTER_kF = 0.0;
-        public static double SHOOTER_kP = 0.01;
+        public static double SHOOTER_kF = 0.044;
+        public static double SHOOTER_kP = 1.0;
         public static double SHOOTER_kI = 0.0;
         public static double SHOOTER_kD = 0.0;
 

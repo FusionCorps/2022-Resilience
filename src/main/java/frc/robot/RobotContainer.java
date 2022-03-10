@@ -15,10 +15,7 @@ import frc.robot.commands.indexer.IndexerBurst;
 import frc.robot.commands.indexer.IndexerManage;
 import frc.robot.commands.indexer.IndexerToggle;
 import frc.robot.commands.intake.IntakeControl;
-import frc.robot.commands.shooter.AddSpeed;
-import frc.robot.commands.shooter.IncrementSpeed;
-import frc.robot.commands.shooter.MinusSpeed;
-import frc.robot.commands.shooter.RunShooter;
+import frc.robot.commands.shooter.*;
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
@@ -56,7 +53,7 @@ public class RobotContainer {
         new JoystickButton(mController, XboxController.Button.kRightBumper.value)
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)
-                .whileHeld(new RunShooter(mShooter, mIndexer, mChassis));
+                .whileHeld(new RunShooterVelocity(mShooter, mIndexer, mChassis));
 //        new JoystickButton(mController, XboxController.Button.kY.value)
 //                .whenPressed(new IncrementSpeed(mShooter));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)

@@ -58,7 +58,7 @@ public class RunShooterVelocity extends CommandBase {
         // shoot k 0.95 above 1.00 below
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
-        double v_calc = 21500 * (0.466 - 0.00403 * ty + 0.000331*pow(ty, 2) - 0.0000213*pow(ty, 3));
+        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
 
@@ -68,13 +68,15 @@ public class RunShooterVelocity extends CommandBase {
             mShooter.target_velocity = SHOOTER_MIN_V;
         }
 
-        mShooter.min_vel = mShooter.target_velocity - 150;
-        mShooter.max_vel = mShooter.target_velocity + 150;
+        mShooter.min_vel = mShooter.target_velocity - 120;
+        mShooter.max_vel = mShooter.target_velocity + 120;
 
 
 
 
-        mShooter.setShooterVelocity(mShooter.target);
+        mShooter.setShooterVelocity(mShooter.target_velocity);
+
+        System.out.println(mShooter.target_velocity);
 
 
 
@@ -85,7 +87,7 @@ public class RunShooterVelocity extends CommandBase {
         }
 
         if (mShooter.isTarget()) {
-            mIndexer.setIndexer(-0.17);
+            mIndexer.setIndexer(-0.14);
             System.out.println(mShooter.target);
         } else {
             mIndexer.setIndexer(0.0);
@@ -100,6 +102,7 @@ public class RunShooterVelocity extends CommandBase {
         mShooter.setShooter(0.0);
         mIndexer.setIndexer(0.0);
         mChassis.shooting = false;
+        mChassis.aiming = false;
     }
 
 }

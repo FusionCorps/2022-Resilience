@@ -44,6 +44,8 @@ public class RunFieldCentricSwerve extends CommandBase {
     public void execute() {
 
         angle = -(mChassis.ahrs.getAngle() % 360);
+//
+//        angle = 0;
 
 
 
@@ -79,7 +81,7 @@ public class RunFieldCentricSwerve extends CommandBase {
         if (mChassis.aiming) {
             tx = mChassis.limelightTable.getEntry("tx").getDouble(0.0);
 
-            tx = tx + 27.4*(strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))));
+            tx = tx + 29.4*(strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))));
 
             if (abs(tx) <= 0.8) {
                 tx = 0;

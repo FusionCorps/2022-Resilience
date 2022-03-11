@@ -28,6 +28,9 @@ public class Shooter extends SubsystemBase {
     public NetworkTableEntry shootKTab =
             tab.add("shootK", 1.0)
                     .getEntry();
+    public NetworkTableEntry shootFPIDTab =
+            tab.add("shootF PID", SHOOTER_kF)
+                    .getEntry();
 
     public Shooter() {
         shooter0 = new WPI_TalonFX(Constants.Shooter.SHOOTER_ID);
@@ -57,6 +60,10 @@ public class Shooter extends SubsystemBase {
 
     public void setShooterVelocity(double vel) {
         shooter0.set(TalonFXControlMode.Velocity, vel);
+    }
+
+    public void setShooter_kF(double kf) {
+        shooter0.config_kF(0, kf);
     }
 
     public double getShooterVel() {

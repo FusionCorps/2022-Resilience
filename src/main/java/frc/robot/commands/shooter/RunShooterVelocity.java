@@ -33,6 +33,12 @@ public class RunShooterVelocity extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        mShooter.setShooter_kF(mShooter.shootFPIDTab.getDouble(0.035));
+        System.out.println(mShooter.shootFPIDTab.getDouble(0.035));
+    }
+
+    @Override
     public void execute() {
         // TODO: Make this limelight dependent
 
@@ -58,7 +64,8 @@ public class RunShooterVelocity extends CommandBase {
         // shoot k 0.95 above 1.00 below
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
-        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
+//        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
+        double v_calc = 10612 + -233*ty + 6.26*pow(ty,2) + 1.06*pow(ty,3) - 0.000246*pow(ty,4);
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
 

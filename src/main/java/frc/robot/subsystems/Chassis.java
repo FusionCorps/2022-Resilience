@@ -26,6 +26,8 @@ public class Chassis extends SubsystemBase {
     public boolean aiming = false;
     public boolean shooting = false;
 
+    public boolean isUsingGyro = true;
+
     public NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
     private static WPI_TalonFX drive0 = new WPI_TalonFX(Constants.DRIVE_FL_ID);

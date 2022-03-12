@@ -3,6 +3,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Indexer;
@@ -22,6 +23,10 @@ public class RunShooterVelocity extends CommandBase {
     Chassis mChassis;
     NetworkTable limelightTable;
 
+    boolean isSpunUp = false;
+
+    Timer mTimer = new Timer();
+
     private SlewRateLimiter fwdLimiter = new SlewRateLimiter(2.5);
 
     public RunShooterVelocity(Shooter shooter, Indexer indexer, Chassis chassis) {
@@ -34,8 +39,7 @@ public class RunShooterVelocity extends CommandBase {
 
     @Override
     public void initialize() {
-        mShooter.setShooter_kF(mShooter.shootFPIDTab.getDouble(0.035));
-        System.out.println(mShooter.shootFPIDTab.getDouble(0.035));
+
     }
 
     @Override
@@ -87,13 +91,19 @@ public class RunShooterVelocity extends CommandBase {
 
 
 
+        if (mShooter.isTarget() && !isSpunUp) {
+            isSpunUp = true;
+            mTimer.reset();
+            mTimer.start();
+        }
+
         if (mShooter.isShooting()) {
             mChassis.shooting = true;
         } else {
             mChassis.shooting = false;
         }
 
-        if (mShooter.isTarget()) {
+        if (mShooter.isTarget() && mTimer.hasElapsed(0.15)) {
             mIndexer.setIndexer(-0.14);
             System.out.println(mShooter.target);
         } else {

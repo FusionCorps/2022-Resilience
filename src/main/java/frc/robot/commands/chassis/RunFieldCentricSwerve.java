@@ -45,7 +45,9 @@ public class RunFieldCentricSwerve extends CommandBase {
 
         angle = -(mChassis.ahrs.getAngle() % 360);
 //
-//        angle = 0;
+        if (!mChassis.isUsingGyro) {
+            angle = 0;
+        }
 
 
 

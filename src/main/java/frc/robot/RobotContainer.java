@@ -8,6 +8,7 @@ import frc.robot.commands.chassis.FieldCentricRecord;
 import frc.robot.commands.chassis.ResetGyro;
 import frc.robot.commands.chassis.RunFieldCentricSwerve;
 import frc.robot.commands.chassis.ToggleAim;
+import frc.robot.commands.chassis.ToggleGyro;
 import frc.robot.commands.climb.ClimbActivate;
 import frc.robot.commands.climb.ClimbManage;
 import frc.robot.commands.climb.ClimbPause;
@@ -54,8 +55,8 @@ public class RobotContainer {
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)
                 .whileHeld(new RunShooterVelocity(mShooter, mIndexer, mChassis));
-//        new JoystickButton(mController, XboxController.Button.kY.value)
-//                .whenPressed(new IncrementSpeed(mShooter));
+       new JoystickButton(mController, XboxController.Button.kY.value)
+               .whenPressed(new ToggleGyro(mChassis));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
                 .whenPressed(new IndexerBurst(mIndexer, 0.20));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)

@@ -39,7 +39,8 @@ public class RunShooterVelocity extends CommandBase {
 
     @Override
     public void initialize() {
-
+        mTimer.reset();
+        mTimer.start();
     }
 
     @Override
@@ -69,7 +70,7 @@ public class RunShooterVelocity extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-        double v_calc = 10612 + -233*ty + 6.26*pow(ty,2) + 1.06*pow(ty,3) - 0.000246*pow(ty,4);
+        double v_calc = 9625 + -58.33*ty + 13.889*pow(ty,2);
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
 
@@ -87,15 +88,8 @@ public class RunShooterVelocity extends CommandBase {
 
         mShooter.setShooterVelocity(mShooter.target_velocity);
 
-        System.out.println(mShooter.target_velocity);
+        System.out.println(mShooter.getShooterVel() - mShooter.target_velocity);
 
-
-
-        if (mShooter.isTarget() && !isSpunUp) {
-            isSpunUp = true;
-            mTimer.reset();
-            mTimer.start();
-        }
 
         if (mShooter.isShooting()) {
             mChassis.shooting = true;
@@ -103,7 +97,7 @@ public class RunShooterVelocity extends CommandBase {
             mChassis.shooting = false;
         }
 
-        if (mShooter.isTarget() && mTimer.hasElapsed(0.15)) {
+        if (mShooter.isTarget() && mTimer.hasElapsed(0.45)) {
             mIndexer.setIndexer(-0.14);
             System.out.println(mShooter.target);
         } else {

@@ -22,7 +22,7 @@ public class ClimbActivate extends CommandBase {
         if (key == 0) {
             mClimb.setClimb(0.1);
         } else {
-            mClimb.setClimb(-0.3);
+            mClimb.setClimb(-0.4);
         }
 
     }

@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis;
 
 import static frc.robot.RobotContainer.mController;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
+import static java.lang.Math.*;
+import static java.lang.Math.abs;
 import static java.lang.StrictMath.PI;
 
 public class ChassisDriveAutonFC extends CommandBase {
@@ -43,6 +43,8 @@ public class ChassisDriveAutonFC extends CommandBase {
         timer.reset();
         timer.start();
 
+
+
         mChassis.solveAngles(-mFwdSpeed, mStrSpeed, mRotSpeed);
 
 
@@ -53,9 +55,49 @@ public class ChassisDriveAutonFC extends CommandBase {
 
         angle = -(mChassis.ahrs.getAngle() % 360);
 
-        mChassis.runSwerve(-mFwdSpeed*cos(angle/360*(2*PI)) + mStrSpeed*sin(angle/360*(2*PI)),
-                mFwdSpeed*sin(angle/360*(2*PI)) - mStrSpeed*cos(angle/360*(2*PI)),
-                mRotSpeed);
+        double tx;
+
+        double axis0 = mFwdSpeed;
+        double axis1 = mStrSpeed;
+        double axis4 = mRotSpeed;
+
+        if (mChassis.aiming) {
+            tx = mChassis.limelightTable.getEntry("tx").getDouble(0.0);
+
+            tx = tx + 29.4*(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
+
+            if (abs(tx) <= 0.8) {
+                tx = 0;
+            }
+
+            double speed_K;
+
+            if (mChassis.shooting) {
+                speed_K = 0.00;
+            } else {
+                speed_K = 1.0;
+            }
+
+
+
+            try {
+                mChassis.runSwerve(speed_K*(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
+                        (axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
+                        0.0135*tx + (tx/(abs(tx)+0.02))*0.006);
+            } catch (Exception e) {
+            }
+
+//            System.out.println("tx: " + tx);
+
+        } else {
+            try {
+                mChassis.runSwerve((axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
+                        (axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
+                        (axis4));
+            } catch (Exception e) {
+            }
+
+        }
 
     }
 

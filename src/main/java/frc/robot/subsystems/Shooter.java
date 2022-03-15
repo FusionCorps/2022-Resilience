@@ -16,7 +16,7 @@ public class Shooter extends SubsystemBase {
 
     WPI_TalonFX shooter0;
 
-    public double shootK;
+    public double shootK = 1.0;
 
     public double target;
     public double target_velocity;

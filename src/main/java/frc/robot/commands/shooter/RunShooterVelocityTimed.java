@@ -13,10 +13,9 @@ import static frc.robot.Constants.Shooter.SHOOTER_MAX_V;
 import static frc.robot.Constants.Shooter.SHOOTER_MIN_V;
 import static frc.robot.RobotContainer.mController;
 import static java.lang.Math.*;
-import static java.lang.Math.pow;
 import static java.lang.StrictMath.PI;
 
-public class RunShooterVelocity extends CommandBase {
+public class RunShooterVelocityTimed extends CommandBase {
 
     Shooter mShooter;
     Indexer mIndexer;
@@ -26,15 +25,18 @@ public class RunShooterVelocity extends CommandBase {
     boolean isSpunUp = false;
 
     Timer mTimer = new Timer();
+    double mTime;
 
     private SlewRateLimiter fwdLimiter = new SlewRateLimiter(2.5);
 
-    public RunShooterVelocity(Shooter shooter, Indexer indexer, Chassis chassis) {
+    public RunShooterVelocityTimed(Shooter shooter, Indexer indexer, Chassis chassis, double time) {
         mShooter = shooter;
         mIndexer = indexer;
         mChassis = chassis;
         addRequirements(mShooter, mIndexer);
         limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+
+        mTime = time;
     }
 
     @Override
@@ -97,7 +99,7 @@ public class RunShooterVelocity extends CommandBase {
             mChassis.shooting = false;
         }
 
-        if (mShooter.isTarget() && mTimer.hasElapsed(0.65)) {
+        if (mShooter.isTarget() && mTimer.hasElapsed(0.45)) {
             mIndexer.setIndexer(-0.14);
             System.out.println(mShooter.target);
         } else {
@@ -109,6 +111,11 @@ public class RunShooterVelocity extends CommandBase {
     }
 
     @Override
+    public boolean isFinished() {
+        return  mTimer.hasElapsed(mTime);
+    }
+
+    @Override
     public void end(boolean isFinished) {
         mShooter.setShooter(0.0);
         mIndexer.setIndexer(0.0);
@@ -117,3 +124,4 @@ public class RunShooterVelocity extends CommandBase {
     }
 
 }
+

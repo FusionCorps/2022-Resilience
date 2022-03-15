@@ -15,7 +15,7 @@ import frc.robot.commands.chassis.ChassisDriveAuton;
 
 import java.io.IOException;
 
-import static frc.robot.RobotContainer.mChassis;
+import static frc.robot.RobotContainer.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,7 +26,7 @@ import static frc.robot.RobotContainer.mChassis;
 public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
-  private Command m_autonomousCommand = new AutonBasic(mChassis);
+  private Command m_autonomousCommand = new AutonBasic(mChassis, mShooter, mIndexer);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new AutonBasic(mChassis);
+    m_autonomousCommand = new AutonBasic(mChassis, mShooter, mIndexer);
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",

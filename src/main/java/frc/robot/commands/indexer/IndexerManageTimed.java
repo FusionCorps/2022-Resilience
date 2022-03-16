@@ -20,6 +20,8 @@ public class IndexerManageTimed extends CommandBase {
     @Override
     public void initialize() {
         mIndexer.configIndexer();
+        mTimer.reset();
+        mTimer.start();
     }
 
     @Override

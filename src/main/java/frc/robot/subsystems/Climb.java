@@ -66,6 +66,10 @@ public class Climb extends SubsystemBase {
         return key;
     }
 
+    public double getClimbPos() {
+        return climb0.getSelectedSensorPosition();
+    }
+
     public void setClimbPos(double pos) {
         climb0.set(TalonFXControlMode.Position, pos);
     }

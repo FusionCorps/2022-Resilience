@@ -22,8 +22,8 @@ public class Constants {
     public static double TRACK_WIDTH_METERS = 0.7112;
     public static double TRACK_LENGTH_METERS = 0.7112;
 
-    public static double SWERVE_FORWARD_SPEED_MAX = 5.2;
-    public static double SWERVE_STRAFE_SPEED_MAX = 5.2;
+    public static double SWERVE_FORWARD_SPEED_MAX = 4.2;
+    public static double SWERVE_STRAFE_SPEED_MAX = 4.2;
     public static double SWERVE_ROT_SPEED_MAX = 6.0;
 
     public static double MAX_SPEED = 9.2;
@@ -52,10 +52,10 @@ public class Constants {
         public static double CLIMB_kI = 0.0;
         public static double CLIMB_kD = 0.30;
 
-        public static double CLIMB_MIN_POS = -2048*140;
-        public static double CLIMB_LOWER_POS = -2048*120;
-        public static double CLIMB_UPPER_POS = -2048*5;
-        public static double CLIMB_MAX_POS = -2048*0.5;
+        public static double CLIMB_MIN_POS = -2048*45;
+        public static double CLIMB_LOWER_POS = 0;
+        public static double CLIMB_UPPER_POS = 204001-2048*5;
+        public static double CLIMB_MAX_POS = 204001-2048*0.5;
 
     }
 
@@ -76,7 +76,7 @@ public class Constants {
         public static double SHOOTER_LOWER_VEL = SHOOTER_TARGET*20000 - 500;
         public static double SHOOTER_UPPER_VEL = SHOOTER_TARGET*20000 + 500;
 
-        public static double SHOOTER_kF = 0.04688;
+        public static double SHOOTER_kF = 0.04488;
         public static double SHOOTER_kP = 0.12;
         public static double SHOOTER_kI = 0.0;
         public static double SHOOTER_kD = 0.95;

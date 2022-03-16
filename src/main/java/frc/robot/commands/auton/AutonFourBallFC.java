@@ -35,7 +35,7 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new RunIntakeTimed(mIntake, -0.75, 0.65),
 
                 // collect ball 2
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.8),
                 new AutonTransition(mChassis, 0.0, 0.3, 0.0, 0.3, 0.0, 0.0, 0.5),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5),
                 new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.3, 0.0, 0.0, 0.8),
@@ -51,7 +51,13 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new ToggleAim(mChassis),
                 new RunIntakeTimed(mIntake, 0.75, 0.35),
                 new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.65),
-                new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 2.0),
+                new ParallelCommandGroup(
+                    new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 2.5),
+                    new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 2.5)
+                ),
+
+                // reset post aim
+                new ChassisDriveAuton(mChassis, 0.0, 0.0, 0.0, 0.1),
 
                 // rotate to new angle
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, -0.7, 0.4),
@@ -59,12 +65,15 @@ public class AutonFourBallFC extends SequentialCommandGroup {
 
                 // move towards the station
                 new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.18, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.18, 0.0, 0.8),
-                        new RunIntakeTimed(mIntake, 0.75, 0.8)),
+                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.18, 0.0, 1.35),
+                        new RunIntakeTimed(mIntake, 0.75, 1.35)),
+                new ParallelCommandGroup(
                 new AutonTransitionFC(mChassis, 0.8, 0.18, 0.0, 0.0, 0.0, 0.0, 0.5),
+                        new RunIntakeTimed(mIntake, 0.75, 0.5)),
 
                 // wait for balls to intake
-                new RunIntakeTimed(mIntake, 0.75, 1.25),
+                new ParallelCommandGroup(new RunIntakeTimed(mIntake, 0.75, 1.75),
+                        new IndexerManageTimed(mIndexer, 1.75)),
 
                 // run it in reverse with balls 3 4
                 new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, -0.8, 0.0, 0.0, 0.5),
@@ -79,7 +88,10 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new RunIntakeTimed(mIntake, 0.75, 0.35),
                 new ToggleAim(mChassis),
                 new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.85),
-                new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 3.0)
+                new ParallelCommandGroup(
+                        new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 3.0),
+                        new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 3.0)
+                )
         );
 
     }

@@ -38,7 +38,10 @@ public class ClimbManage extends CommandBase {
             } else {
                 mClimb.setClimbPos(CLIMB_MAX_POS + 0.25*2048);
             }
+
         }
+
+        System.out.println(mClimb.getClimbPos());
 
     }
 

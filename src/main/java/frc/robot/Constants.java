@@ -2,7 +2,7 @@ package frc.robot;
 
 public class Constants {
 
-    public static int AXIS_FL_ID = 10;
+    public static int AXIS_FL_ID = 0;
     public static int AXIS_BL_ID = 1;
     public static int AXIS_FR_ID = 3;
     public static int AXIS_BR_ID = 7;

@@ -59,12 +59,12 @@ public class RunFieldCentricSwerve extends CommandBase {
         double axis1 = mController.getRawAxis(1);
         double axis4 = mController.getRawAxis(4);
 
-        if (axis0*axis0 + axis1*axis1 <= 0.0064) {
+        if (axis0*axis0 + axis1*axis1 <= 0.0016) {
             axis0 = 0;
             axis1 = 0;
         }
 
-        if (abs(axis4) <= 0.045) {
+        if (abs(axis4) <= 0.02) {
             axis4 = 0;
         }
 

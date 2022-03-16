@@ -6,6 +6,7 @@ import frc.robot.commands.chassis.ChassisDriveAuton;
 import frc.robot.commands.chassis.ChassisDriveAutonFC;
 import frc.robot.commands.chassis.ResetGyro;
 import frc.robot.commands.chassis.ToggleAim;
+import frc.robot.commands.indexer.IndexerManageTimed;
 import frc.robot.commands.intake.RunIntakeTimed;
 import frc.robot.commands.shooter.RunShooterVelocityTimed;
 import frc.robot.subsystems.Chassis;
@@ -38,7 +39,8 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new AutonTransition(mChassis, 0.0, 0.3, 0.0, 0.3, 0.0, 0.0, 0.5),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5),
                 new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.3, 0.0, 0.0, 0.8),
-                        new RunIntakeTimed(mIntake, 0.75, 0.85)),
+                        new RunIntakeTimed(mIntake, 0.75, 0.8)
+                        ),
                 new AutonTransition(mChassis, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
 
                 // turn to goal
@@ -56,18 +58,18 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new AutonTransition(mChassis, 0.0, 0.0, -0.7, 0.0, 0.0, 0.0, 0.4),
 
                 // move towards the station
-                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.0, 0.0, 0.75),
-                        new RunIntakeTimed(mIntake, 0.75, 0.85)),
-                new AutonTransitionFC(mChassis, 0.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.18, 0.0, 0.5),
+                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.18, 0.0, 0.8),
+                        new RunIntakeTimed(mIntake, 0.75, 0.8)),
+                new AutonTransitionFC(mChassis, 0.8, 0.18, 0.0, 0.0, 0.0, 0.0, 0.5),
 
                 // wait for balls to intake
                 new RunIntakeTimed(mIntake, 0.75, 1.25),
 
                 // run it in reverse with balls 3 4
                 new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, -0.8, 0.0, 0.0, 0.5),
-                new ChassisDriveAuton(mChassis, -0.8, 0.0, 0.0, 0.75),
-                new AutonTransition(mChassis, -0.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new ChassisDriveAutonFC(mChassis, -0.8, 0.0, 0.0, 0.75),
+                new AutonTransitionFC(mChassis, -0.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
 
                 // turn to target
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.45),

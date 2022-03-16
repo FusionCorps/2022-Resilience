@@ -102,7 +102,7 @@ public class RunFieldCentricSwerve extends CommandBase {
             try {
                 mChassis.runSwerve(speed_K*fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
                         strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))),
-                        0.0135*tx + (tx/(abs(tx)+0.02))*0.006);
+                        0.0125*tx + (tx/(abs(tx)+0.02))*0.006);
             } catch (Exception e) {
             }
 

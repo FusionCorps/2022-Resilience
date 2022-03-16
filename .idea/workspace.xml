@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd9c4f-5210-4083-9e54-33666a6138c9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auton/AutonFourBall.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auton/AutonAdvanced.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auton/AutonAdvanced.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auton/AutonBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auton/AutonBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/intake/RunIntakeTimed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/intake/RunIntakeTimed.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RunShooterVelocityTimed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RunShooterVelocityTimed.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

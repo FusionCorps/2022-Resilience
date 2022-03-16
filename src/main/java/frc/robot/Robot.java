@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.auton.AutonAdvanced;
 import frc.robot.commands.auton.AutonBasic;
+import frc.robot.commands.auton.AutonFourBall;
 import frc.robot.commands.chassis.ChassisDriveAuton;
 
 
@@ -27,7 +28,7 @@ import static frc.robot.RobotContainer.*;
 public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
-  private Command m_autonomousCommand = new AutonAdvanced(mChassis, mShooter, mIndexer, mIntake);
+  private Command m_autonomousCommand = new AutonFourBall(mChassis, mShooter, mIndexer, mIntake);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -81,7 +82,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new AutonAdvanced(mChassis, mShooter, mIndexer, mIntake);
+    m_autonomousCommand = new AutonFourBall(mChassis, mShooter, mIndexer, mIntake);
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",

@@ -30,36 +30,56 @@ public class AutonFourBall extends SequentialCommandGroup {
         addRequirements(mChassis, mShooter, mIndexer, mIntake);
 
         addCommands(new ResetGyro(mChassis),
+                // drop intake
                 new RunIntakeTimed(mIntake, -0.75, 0.65),
+
+                // pickup ball 2
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.5),
                 new AutonTransition(mChassis, 0.0, 0.3, 0.0, 0.3, 0.0, 0.0, 0.5),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5),
                 new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.3, 0.0, 0.0, 0.8),
                         new RunIntakeTimed(mIntake, 0.75, 0.85)),
                 new AutonTransition(mChassis, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+
+                // stop and turn to target
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.4),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.4),
+
+                // aim and shoot balls 1 2
                 new ToggleAim(mChassis),
                 new RunIntakeTimed(mIntake, 0.75, 0.35),
                 new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.65),
                 new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 2.0),
+
+                // turn back around
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, -0.7, 0.4),
                 new AutonTransition(mChassis, 0.0, 0.0, -0.7, 0.0, 0.0, 0.0, 0.4),
+
+                // go to player station
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, 0.5),
                 new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.8, 0.0, 0.0, 0.75),
                         new RunIntakeTimed(mIntake, 0.75, 0.85)),
                 new AutonTransition(mChassis, 0.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+
+                // rotate to player
                 new ParallelCommandGroup(new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, -0.5, 0.2),
                         new RunIntakeTimed(mIntake, 0.75, 0.2)),
                 new ParallelCommandGroup(new AutonTransition(mChassis, 0.0, 0.0, -0.5, 0.0, 0.0, 0.0, 0.2),
                         new RunIntakeTimed(mIntake, 0.75, 0.2)),
+
+                // wait for player
                 new RunIntakeTimed(mIntake, 0.75, 1.25),
+
+                // back up
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, -0.3, 0.0, 0.0, 0.5),
                 new ChassisDriveAuton(mChassis, -0.3, 0.0, 0.0, 1.6),
                 new AutonTransition(mChassis, -0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+
+                // turn around
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.45),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0, 0.45),
 
+                // aim and shoot
                 new RunIntakeTimed(mIntake, 0.75, 0.35),
                 new ToggleAim(mChassis),
                 new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.85),

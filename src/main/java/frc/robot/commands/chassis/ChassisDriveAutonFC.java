@@ -57,8 +57,8 @@ public class ChassisDriveAutonFC extends CommandBase {
 
         double tx;
 
-        double axis0 = mFwdSpeed;
-        double axis1 = mStrSpeed;
+        double axis1 = -mFwdSpeed;
+        double axis0 = mStrSpeed;
         double axis4 = mRotSpeed;
 
         if (mChassis.aiming) {

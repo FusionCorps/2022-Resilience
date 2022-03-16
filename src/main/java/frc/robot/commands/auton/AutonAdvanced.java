@@ -28,15 +28,19 @@ public class AutonAdvanced extends SequentialCommandGroup {
         mIndexer = indexer;
         mIntake = intake;
 
-        addRequirements(mChassis, mShooter, mIndexer);
+        addRequirements(mChassis, mShooter, mIndexer, mIntake);
 
         addCommands(new ResetGyro(mChassis),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, -0.4, 0.0, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, -0.4, 0.0, 0.0, 0.5),
-                        new RunIntakeTimed(mIntake, 0.5)),
-                new AutonTransition(mChassis, -0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new RunIntakeTimed(mIntake, -0.75, 0.65),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5),
+                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.3, 0.0, 0.0, 0.8),
+                        new RunIntakeTimed(mIntake, 0.75, 0.85)),
+                new AutonTransition(mChassis, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5),
                 new ToggleAim(mChassis),
-                new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.5),
+                new RunIntakeTimed(mIntake, 0.75, 0.35),
+                new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.85),
                 new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 3.0)
         );
 

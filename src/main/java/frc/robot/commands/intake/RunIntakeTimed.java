@@ -14,12 +14,15 @@ public class RunIntakeTimed extends CommandBase {
     Intake mIntake;
     double mTime;
 
+    double mPct;
+
     private Timer timer = new Timer();
 
-    public RunIntakeTimed(Intake intake, double time) {
+    public RunIntakeTimed(Intake intake, double pct, double time) {
         mIntake = intake;
         addRequirements(mIntake);
         mTime = time;
+        mPct = pct;
     }
 
     @Override
@@ -30,9 +33,7 @@ public class RunIntakeTimed extends CommandBase {
 
     @Override
     public void execute() {
-        mIntake.runIntake(indexLimit.calculate(
-                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())
-                        * Constants.INDEXER_TARGET));
+        mIntake.runIntake(mPct);
 //        System.out.println(indexLimit.calculate(
 //                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())
 //                        * Constants.INDEXER_TARGET));

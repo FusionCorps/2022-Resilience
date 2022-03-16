@@ -72,7 +72,7 @@ public class RunShooterVelocityTimed extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-        double v_calc = 0.87*(11250 - 250/2*ty);
+        double v_calc = 0.88*(11250 - 250/2*ty);
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
 
@@ -99,7 +99,7 @@ public class RunShooterVelocityTimed extends CommandBase {
             mChassis.shooting = false;
         }
 
-        if (mShooter.isTarget() && mTimer.hasElapsed(0.45)) {
+        if (mShooter.isTarget() && mTimer.hasElapsed(0.65)) {
             mIndexer.setIndexer(-0.14);
             System.out.println(mShooter.target);
         } else {

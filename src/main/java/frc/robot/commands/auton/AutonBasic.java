@@ -28,11 +28,11 @@ public class AutonBasic extends SequentialCommandGroup {
 
         addCommands(new ResetGyro(mChassis),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, -0.4, 0.0, 0.0, 0.5),
-                new ChassisDriveAuton(mChassis, -0.4, 0.0, 0.0, 0.5),
+                new ChassisDriveAuton(mChassis, -0.4, 0.0, 0.0, 0.75),
                 new AutonTransition(mChassis, -0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
                 new ToggleAim(mChassis),
                 new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.5),
-                new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 3.0)
+                new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 3.5)
         );
 
     }

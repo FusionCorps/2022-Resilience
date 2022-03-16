@@ -2,20 +2,20 @@ package frc.robot;
 
 public class Constants {
 
-    public static int AXIS_FL_ID = 04;
-    public static int AXIS_BL_ID = 8;
-    public static int AXIS_FR_ID = 07;
-    public static int AXIS_BR_ID = 02;
+    public static int AXIS_FL_ID = 10;
+    public static int AXIS_BL_ID = 1;
+    public static int AXIS_FR_ID = 3;
+    public static int AXIS_BR_ID = 7;
 
-    public static int DRIVE_FL_ID = 03;
-    public static int DRIVE_BL_ID = 00;
-    public static int DRIVE_FR_ID = 05;
-    public static int DRIVE_BR_ID = 01;
+    public static int DRIVE_FL_ID = 8;
+    public static int DRIVE_BL_ID = 9;
+    public static int DRIVE_FR_ID = 4;
+    public static int DRIVE_BR_ID = 5;
 
-    public static int CODER_FL_ID = 03;
-    public static int CODER_BL_ID = 01;
-    public static int CODER_FR_ID = 00;
-    public static int CODER_BR_ID = 02;
+    public static int CODER_FL_ID = 2;
+    public static int CODER_BL_ID = 11;
+    public static int CODER_FR_ID = 12;
+    public static int CODER_BR_ID = 13;
 
     public static double INDEXER_TARGET = 0.7;
 

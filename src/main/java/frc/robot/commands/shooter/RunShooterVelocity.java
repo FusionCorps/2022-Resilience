@@ -4,6 +4,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Indexer;
@@ -57,8 +58,8 @@ public class RunShooterVelocity extends CommandBase {
         double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
-        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
-
+//        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
+        mShooter.shootK = SmartDashboard.getNumber("DB/Slider 0", 1.0);
 
 //            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
         // double temp = 0.49 - 0.009*ty; if battery low

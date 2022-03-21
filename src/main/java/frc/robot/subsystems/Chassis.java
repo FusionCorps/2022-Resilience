@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
@@ -25,6 +26,8 @@ public class Chassis extends SubsystemBase {
 
     public boolean aiming = false;
     public boolean shooting = false;
+
+    public boolean isBraking = true;
 
     public boolean isUsingGyro = true;
 
@@ -216,6 +219,22 @@ public class Chassis extends SubsystemBase {
         axis1.feed();
         axis2.feed();
         axis3.feed();
+    }
+
+    public void toggleBrakes() {
+        if (isBraking) {
+            drive0.setNeutralMode(NeutralMode.Coast);
+            drive1.setNeutralMode(NeutralMode.Coast);
+            drive2.setNeutralMode(NeutralMode.Coast);
+            drive3.setNeutralMode(NeutralMode.Coast);
+            System.out.println("Coast");
+        } else {
+            drive0.setNeutralMode(NeutralMode.Brake);
+            drive1.setNeutralMode(NeutralMode.Brake);
+            drive2.setNeutralMode(NeutralMode.Brake);
+            drive3.setNeutralMode(NeutralMode.Brake);
+        }
+        isBraking = !isBraking;
     }
 
 

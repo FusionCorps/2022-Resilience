@@ -35,23 +35,27 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new RunIntakeTimed(mIntake, -0.75, 0.65),
 
                 // collect ball 2
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.8),
-                new AutonTransition(mChassis, 0.0, 0.3, 0.0, 0.3, 0.0, 0.0, 0.5),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.3, 0.0, 0.0, 0.8),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.4, 0.0, 0.8),
+                new AutonTransition(mChassis, 0.0, 0.4, 0.0, 0.3, 0.0, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.4, 0.0, 0.0, 0.5),
+                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.4, 0.0, 0.0, 0.8),
                         new RunIntakeTimed(mIntake, 0.75, 0.8)
                         ),
-                new AutonTransition(mChassis, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
 
                 // turn to goal
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.4),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.4),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.3),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0, 0.3),
 
                 // aim and shoot balls 1 2
                 new ToggleAim(mChassis),
-                new RunIntakeTimed(mIntake, 0.75, 0.35),
+
                 new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.65),
                 new ParallelCommandGroup(
+                    new SequentialCommandGroup(
+                            new RunIntakeTimed(mIntake, 0.75, 0.5),
+                            new RunIntakeTimed(mIntake, 0.0, 2.0)
+                    ),
                     new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 2.5),
                     new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 2.5)
                 ),

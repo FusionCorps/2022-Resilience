@@ -58,8 +58,8 @@ public class RunShooterVelocity extends CommandBase {
         double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
-//        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
-        mShooter.shootK = SmartDashboard.getNumber("DB/Slider 0", 1.0);
+        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
+//        mShooter.shootK = SmartDashboard.getNumber("DB/Slider 0", 1.0);
 
 //            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
         // double temp = 0.49 - 0.009*ty; if battery low
@@ -89,7 +89,7 @@ public class RunShooterVelocity extends CommandBase {
 
         mShooter.setShooterVelocity(mShooter.target_velocity);
 
-        System.out.println(mShooter.getShooterVel() - mShooter.target_velocity);
+        System.out.println(ty);
 
 
         if (mShooter.isShooting()) {

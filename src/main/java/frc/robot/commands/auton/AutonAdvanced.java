@@ -6,6 +6,7 @@ import frc.robot.commands.chassis.ChassisDriveAuton;
 import frc.robot.commands.chassis.ChassisDriveAutonFC;
 import frc.robot.commands.chassis.ResetGyro;
 import frc.robot.commands.chassis.ToggleAim;
+import frc.robot.commands.indexer.IndexerManageTimed;
 import frc.robot.commands.intake.RunIntakeTimed;
 import frc.robot.commands.shooter.RunShooterVelocityTimed;
 import frc.robot.subsystems.Chassis;
@@ -32,16 +33,25 @@ public class AutonAdvanced extends SequentialCommandGroup {
 
         addCommands(new ResetGyro(mChassis),
                 new RunIntakeTimed(mIntake, -0.75, 0.65),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.3, 0.0, 0.0, 0.9),
-                        new RunIntakeTimed(mIntake, 0.75, 0.9)),
-                new AutonTransition(mChassis, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.5),
+                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.2, 0.0, 0.0, 2.4),
+                        new RunIntakeTimed(mIntake, 0.65, 2.4)),
+                new ParallelCommandGroup(new AutonTransition(mChassis, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                        new RunIntakeTimed(mIntake, 0.65, 0.5),
+                        new IndexerManageTimed(mIndexer, 0.5)),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5),
                 new ToggleAim(mChassis),
-                new RunIntakeTimed(mIntake, 0.75, 0.35),
-                new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 0.85),
-                new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 3.0)
+                new ParallelCommandGroup(
+                        new SequentialCommandGroup(
+                                new RunIntakeTimed(mIntake, 0.0, 0.5),
+                                new RunIntakeTimed(mIntake, 0.6, 0.5),
+                                new RunIntakeTimed(mIntake, 0.0, 1.5)
+                        ),
+                        new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 2.5),
+                        new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 2.5)
+                ),
+                new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 10.0)
         );
 
     }

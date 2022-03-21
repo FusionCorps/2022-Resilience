@@ -4,11 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.commands.auton.AutonBasic;
-import frc.robot.commands.chassis.FieldCentricRecord;
-import frc.robot.commands.chassis.ResetGyro;
-import frc.robot.commands.chassis.RunFieldCentricSwerve;
-import frc.robot.commands.chassis.ToggleAim;
-import frc.robot.commands.chassis.ToggleGyro;
+import frc.robot.commands.chassis.*;
 import frc.robot.commands.climb.ClimbActivate;
 import frc.robot.commands.climb.ClimbManage;
 import frc.robot.commands.climb.ClimbPause;
@@ -39,6 +35,7 @@ public class RobotContainer {
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
         mClimb.setDefaultCommand(new ClimbManage(mClimb));
         mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
+        mShooter.setDefaultCommand(new ShooterSpeedManage(mShooter));
 
     }
 
@@ -55,8 +52,8 @@ public class RobotContainer {
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)
                 .whileHeld(new RunShooterVelocity(mShooter, mIndexer, mChassis));
-       new JoystickButton(mController, XboxController.Button.kY.value)
-               .whenPressed(new ToggleGyro(mChassis));
+//       new JoystickButton(mController, XboxController.Button.kY.value)
+//               .whenPressed(new ChassisToggleBrakes(mChassis));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
                 .whenPressed(new IndexerBurst(mIndexer, 0.20));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)

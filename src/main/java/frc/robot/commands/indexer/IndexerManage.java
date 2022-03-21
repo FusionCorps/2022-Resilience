@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
 
+import static frc.robot.RobotContainer.mController;
+
 public class IndexerManage extends CommandBase {
 
     Indexer mIndexer;
@@ -21,14 +23,20 @@ public class IndexerManage extends CommandBase {
 
     @Override
     public void execute() {
-        if (mIndexer.isAutomated) {
-            if (mIndexer.break_beam.get()) {
-                mIndexer.setIndexer(-0.17);
-            } else {
-                mIndexer.setIndexerVel(0);
-            }
+
+        if (mController.getPOV() == 180) {
+            mIndexer.setIndexer(0.2);
         } else {
-            mIndexer.setIndexer(0.0);
+
+            if (mIndexer.isAutomated) {
+                if (mIndexer.break_beam.get()) {
+                    mIndexer.setIndexer(-0.17);
+                } else {
+                    mIndexer.setIndexerVel(0);
+                }
+            } else {
+                mIndexer.setIndexer(0.0);
+            }
         }
     }
 

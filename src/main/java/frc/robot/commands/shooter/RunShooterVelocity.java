@@ -98,8 +98,8 @@ public class RunShooterVelocity extends CommandBase {
             mChassis.shooting = false;
         }
 
-        if (mShooter.isTarget() && mTimer.hasElapsed(0.65)) {
-            mIndexer.setIndexer(-0.14);
+        if (mShooter.isTarget()) {
+            mIndexer.setIndexer(-0.24);
             System.out.println(mShooter.target);
         } else {
             mIndexer.setIndexer(0.0);

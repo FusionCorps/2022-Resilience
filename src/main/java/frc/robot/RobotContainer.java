@@ -52,8 +52,8 @@ public class RobotContainer {
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)
                 .whileHeld(new RunShooterVelocity(mShooter, mIndexer, mChassis));
-//       new JoystickButton(mController, XboxController.Button.kY.value)
-//               .whenPressed(new ChassisToggleBrakes(mChassis));
+       new JoystickButton(mController, XboxController.Button.kY.value)
+               .whenPressed(new ToggleGyro(mChassis));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
                 .whenPressed(new IndexerBurst(mIndexer, 0.20));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)

@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -56,7 +58,10 @@ public class Robot extends TimedRobot {
     mChassis.comboFL.zero();
     mChassis.comboBL.zero();
 
-    CameraServer.startAutomaticCapture();
+    new Thread(() -> {
+      UsbCamera camera = CameraServer.startAutomaticCapture();
+      camera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 160, 120, 30);
+    }).start();
 
     // Power Slider
     SmartDashboard.putNumber("DB/Slider 0", 1.00);

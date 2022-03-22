@@ -35,7 +35,7 @@ public class RobotContainer {
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
         mClimb.setDefaultCommand(new ClimbManage(mClimb));
         mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
-        mShooter.setDefaultCommand(new ShooterSpeedManage(mShooter));
+        mShooter.setDefaultCommand(new RunShooterVelocityTrigger(mShooter, mIndexer, mChassis));
 
     }
 

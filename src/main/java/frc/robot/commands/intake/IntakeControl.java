@@ -21,7 +21,7 @@ public class IntakeControl extends CommandBase {
     @Override
     public void execute() {
         mIntake.runIntake(indexLimit.calculate(
-                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())
+                (mController.getRightTriggerAxis())
                         * Constants.INDEXER_TARGET));
 //        System.out.println(indexLimit.calculate(
 //                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())

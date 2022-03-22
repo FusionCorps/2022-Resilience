@@ -20,9 +20,13 @@ public class IntakeControl extends CommandBase {
 
     @Override
     public void execute() {
-        mIntake.runIntake(indexLimit.calculate(
-                (mController.getRightTriggerAxis())
-                        * Constants.INDEXER_TARGET));
+        if (mController.getPOV() == 180) {
+            mIntake.runIntake(-0.6);
+        } else {
+            mIntake.runIntake(indexLimit.calculate(
+                    (mController.getRightTriggerAxis())
+                            * Constants.INDEXER_TARGET));
+        }
 //        System.out.println(indexLimit.calculate(
 //                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())
 //                        * Constants.INDEXER_TARGET));

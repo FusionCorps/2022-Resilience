@@ -23,5 +23,5 @@ public class RevShooterManage extends CommandBase {
             mShooter.setShooter(0.0);
         }
     }
-    
+
 }

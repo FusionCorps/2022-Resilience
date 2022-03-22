@@ -105,7 +105,11 @@ public class RunShooterVelocityTrigger extends CommandBase {
             }
 
         } else {
-            mShooter.setShooter(0.0);
+            if (mChassis.aiming) {
+                mShooter.setShooter(0.4);
+            } else {
+                mShooter.setShooter(0.0);
+            }
             if (mController.getPOV() == 180) {
                 mIndexer.setIndexer(0.2);
             } else {

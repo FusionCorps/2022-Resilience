@@ -45,6 +45,14 @@ public class RunShooterVelocityTrigger extends CommandBase {
     @Override
     public void execute() {
 
+        mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
+        if (mController.getPOV() == 90) {
+            mShooter.shootK += 0.001;
+        } else if (mController.getPOV() == 270) {
+            mShooter.shootK -= 0.001;
+        }
+        mShooter.shootKTab.setDouble(mShooter.shootK);
+
         if (mController.getLeftTriggerAxis() > 0.7) {
 
             // TODO: Make this limelight dependent
@@ -72,7 +80,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-            double v_calc = 9321;
+            double v_calc = 10000;
 
             mShooter.target_velocity = mShooter.shootK * v_calc;
 
@@ -88,7 +96,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
             mShooter.setShooterVelocity(mShooter.target_velocity);
 
-            System.out.println(ty);
+            System.out.println(mShooter.getShooterVel() - mShooter.target_velocity);
 
 
             if (mShooter.isShooting()) {
@@ -98,7 +106,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
             }
 
             if (mShooter.isTarget()) {
-                mIndexer.setIndexer(-0.14);
+                mIndexer.setIndexer(-0.18);
                 System.out.println(mShooter.target);
             } else {
                 mIndexer.setIndexer(0.0);

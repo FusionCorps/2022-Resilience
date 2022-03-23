@@ -41,7 +41,6 @@ public class ClimbManage extends CommandBase {
 
         }
 
-        System.out.println(mClimb.getClimbPos());
 
     }
 

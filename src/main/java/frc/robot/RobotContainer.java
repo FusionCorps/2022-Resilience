@@ -34,7 +34,7 @@ public class RobotContainer {
         mChassis.setDefaultCommand(new RunFieldCentricSwerve(mChassis));
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
         mClimb.setDefaultCommand(new ClimbManage(mClimb));
-        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
+//        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
         mShooter.setDefaultCommand(new RunShooterVelocityTrigger(mShooter, mIndexer, mChassis));
 
     }

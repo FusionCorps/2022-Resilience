@@ -72,7 +72,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-            double v_calc = 9500;
+            double v_calc = 9321;
 
             mShooter.target_velocity = mShooter.shootK * v_calc;
 
@@ -98,7 +98,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
             }
 
             if (mShooter.isTarget()) {
-                mIndexer.setIndexer(-0.24);
+                mIndexer.setIndexer(-0.14);
                 System.out.println(mShooter.target);
             } else {
                 mIndexer.setIndexer(0.0);
@@ -106,7 +106,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
         } else {
             if (mChassis.aiming) {
-                mShooter.setShooter(0.4);
+                mShooter.setShooter(0.41);
             } else {
                 mShooter.setShooter(0.0);
             }

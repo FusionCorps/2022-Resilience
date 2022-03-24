@@ -32,20 +32,19 @@ public class AutonFourBallFC extends SequentialCommandGroup {
 
         addCommands(new ResetGyro(mChassis),
                 // drop intake
-                new RunIntakeTimed(mIntake, -0.75, 0.65),
+                new RunIntakeTimed(mIntake, -0.75, 0.35),
 
                 // collect ball 2
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.4, 0.0, 0.8),
-                new AutonTransition(mChassis, 0.0, 0.4, 0.0, 0.3, 0.0, 0.0, 0.5),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.4, 0.0, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.4, 0.0, 0.0, 0.8),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.4, 0.0, 0.6),
+                new AutonTransition(mChassis, 0.0, 0.4, 0.0, 0.6, 0.0, 0.0, 0.5),
+                new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.6, 0.0, 0.0, 0.8),
                         new RunIntakeTimed(mIntake, 0.75, 0.8)
                         ),
-                new AutonTransition(mChassis, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25),
 
                 // turn to goal
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.3),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0, 0.3),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.3),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.9, 0.0, 0.0, 0.0, 0.3),
 
                 // aim and shoot balls 1 2
                 new ToggleAim(mChassis),
@@ -64,29 +63,29 @@ public class AutonFourBallFC extends SequentialCommandGroup {
                 new ChassisDriveAuton(mChassis, 0.0, 0.0, 0.0, 0.1),
 
                 // rotate to new angle
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, -0.7, 0.4),
-                new AutonTransition(mChassis, 0.0, 0.0, -0.7, 0.0, 0.0, 0.0, 0.4),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, -0.8, 0.4),
+                new AutonTransition(mChassis, 0.0, 0.0, -0.8, 0.0, 0.0, 0.0, 0.4),
 
                 // move towards the station
-                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.18, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.18, 0.0, 1.35),
-                        new RunIntakeTimed(mIntake, 0.75, 1.35)),
+                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.2, 0.0, 0.5),
+                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.2, 0.0, 0.92),
+                        new RunIntakeTimed(mIntake, 0.75, 0.9)),
                 new ParallelCommandGroup(
-                new AutonTransitionFC(mChassis, 0.8, 0.18, 0.0, 0.0, 0.0, 0.0, 0.5),
-                        new RunIntakeTimed(mIntake, 0.75, 0.5)),
+                new AutonTransitionFC(mChassis, 0.8, 0.2, 0.0, 0.0, 0.0, 0.0, 0.4),
+                        new RunIntakeTimed(mIntake, 0.75, 0.4)),
 
                 // wait for balls to intake
-                new ParallelCommandGroup(new RunIntakeTimed(mIntake, 0.75, 1.75),
-                        new IndexerManageTimed(mIndexer, 1.75)),
+                new ParallelCommandGroup(new RunIntakeTimed(mIntake, 0.75, 0.45),
+                        new IndexerManageTimed(mIndexer, 0.45)),
 
                 // run it in reverse with balls 3 4
-                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, -0.8, 0.0, 0.0, 0.5),
-                new ChassisDriveAutonFC(mChassis, -0.8, 0.0, 0.0, 0.75),
-                new AutonTransitionFC(mChassis, -0.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, -1.2, 0.0, 0.0, 0.5),
+                new ChassisDriveAutonFC(mChassis, -1.2, 0.0, 0.0, 0.65),
+                new AutonTransitionFC(mChassis, -1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
 
                 // turn to target
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.45),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0, 0.45),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.8, 0.4),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.8, 0.0, 0.0, 0.0, 0.4),
 
                 // aim and shoot balls 3 4
                 new RunIntakeTimed(mIntake, 0.75, 0.35),

@@ -80,7 +80,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-            double v_calc = 0.98*(9248 - 108*ty);
+            double v_calc = 0.99*(9248 - 107.4*ty);
 
             mShooter.target_velocity = mShooter.shootK * v_calc;
 
@@ -105,14 +105,25 @@ public class RunShooterVelocityTrigger extends CommandBase {
                 mChassis.shooting = false;
             }
 
+
+
             if (mShooter.isTarget()) {
-                mIndexer.setIndexer(-0.18);
-                System.out.println(mShooter.target);
+                mIndexer.setIndexer(-0.17);
             } else {
-                mIndexer.setIndexer(0.0);
+                if (mIndexer.isAutomated) {
+                    if (mIndexer.break_beam.get()) {
+                        mIndexer.setIndexer(-0.17);
+                    } else {
+                        mIndexer.setIndexerVel(0);
+                    }
+                } else {
+
+                    mIndexer.setIndexer(0.0);
+                }
             }
 
         } else {
+            System.out.println(limelightTable.getEntry("tx").getDouble(0.0));
             if (mChassis.aiming) {
                 mShooter.setShooter(0.41);
             } else {
@@ -121,7 +132,6 @@ public class RunShooterVelocityTrigger extends CommandBase {
             if (mController.getPOV() == 180) {
                 mIndexer.setIndexer(0.2);
             } else {
-
                 if (mIndexer.isAutomated) {
                     if (mIndexer.break_beam.get()) {
                         mIndexer.setIndexer(-0.17);
@@ -129,6 +139,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
                         mIndexer.setIndexerVel(0);
                     }
                 } else {
+
                     mIndexer.setIndexer(0.0);
                 }
             }

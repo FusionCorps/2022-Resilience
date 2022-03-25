@@ -48,7 +48,7 @@ public class Shooter extends SubsystemBase {
 
 
         shootK = 1.0;
-
+        shootKTab.setDouble(shootK);
 
         min_vel = Constants.Shooter.SHOOTER_LOWER_VEL;
         max_vel = Constants.Shooter.SHOOTER_UPPER_VEL;

@@ -68,8 +68,8 @@ public class AutonFourBallFC extends SequentialCommandGroup {
 
                 // move towards the station
                 new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.2, 0.0, 0.5),
-                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.2, 0.0, 0.92),
-                        new RunIntakeTimed(mIntake, 0.75, 0.9)),
+                new ParallelCommandGroup(new ChassisDriveAutonFC(mChassis, 0.8, 0.2, 0.0, 0.82),
+                        new RunIntakeTimed(mIntake, 0.75, 0.82)),
                 new ParallelCommandGroup(
                 new AutonTransitionFC(mChassis, 0.8, 0.2, 0.0, 0.0, 0.0, 0.0, 0.4),
                         new RunIntakeTimed(mIntake, 0.75, 0.4)),

@@ -47,7 +47,7 @@ public class Shooter extends SubsystemBase {
         target_velocity = Constants.Shooter.SHOOTER_TARGET * 21000;
 
 
-        shootK = 1.0;
+        shootK = 0.985;
         shootKTab.setDouble(shootK);
 
         min_vel = Constants.Shooter.SHOOTER_LOWER_VEL;

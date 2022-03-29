@@ -31,7 +31,8 @@ public class AutonAdvanced extends SequentialCommandGroup {
 
         addRequirements(mChassis, mShooter, mIndexer, mIntake);
 
-        addCommands(new ResetGyro(mChassis),
+        addCommands(
+
                 new RunIntakeTimed(mIntake, -0.75, 0.65),
                 new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.5),
                 new ParallelCommandGroup(new ChassisDriveAuton(mChassis, 0.2, 0.0, 0.0, 2.4),

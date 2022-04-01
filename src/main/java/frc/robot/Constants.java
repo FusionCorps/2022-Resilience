@@ -47,6 +47,9 @@ public class Constants {
         public static int CLIMB_0_ID = 30;
         public static int CLIMB_1_ID = 31;
 
+        public static int SERVO_L_ID = 0;
+        public static int SERVO_R_ID = 1;
+
         public static double CLIMB_kF = 0.0;
         public static double CLIMB_kP = 0.07;
         public static double CLIMB_kI = 0.0;

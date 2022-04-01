@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -11,6 +12,11 @@ public class Climb extends SubsystemBase {
 
     WPI_TalonFX climb0;
     WPI_TalonFX climb1;
+
+    public boolean isClosed = true;
+
+    Servo servo_l;
+    Servo servo_r;
 
     public boolean isPause = true;
 
@@ -39,10 +45,20 @@ public class Climb extends SubsystemBase {
         climb0.config_kI(0, CLIMB_kI);
         climb0.config_kD(0, CLIMB_kD);
 
+        servo_l = new Servo(0);
+        servo_r = new Servo(SERVO_R_ID);
+
+
+
     }
 
     public void setClimb(double pct) {
         climb0.set(pct);
+    }
+
+    public void setLeftServoAngle(double angle) {
+        servo_l.setAngle(angle);
+        servo_r.setAngle(180-angle);
     }
 
     public int getClimbPosKey() {

@@ -18,10 +18,20 @@ public class ClimbManage extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+
+    }
+
+    @Override
     public void execute() {
         int key;
         key = mClimb.getClimbPosKey();
 
+        if (mClimb.isClosed) {
+            mClimb.setLeftServoAngle(67);
+        } else {
+            mClimb.setLeftServoAngle(115);
+        }
 
         if (mClimb.isPause) {
             mClimb.setClimb(0.0);

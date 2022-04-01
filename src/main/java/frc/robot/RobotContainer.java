@@ -8,6 +8,7 @@ import frc.robot.commands.chassis.*;
 import frc.robot.commands.climb.ClimbActivate;
 import frc.robot.commands.climb.ClimbManage;
 import frc.robot.commands.climb.ClimbPause;
+import frc.robot.commands.climb.ClimbServoActuate;
 import frc.robot.commands.indexer.IndexerBurst;
 import frc.robot.commands.indexer.IndexerManage;
 import frc.robot.commands.indexer.IndexerToggle;
@@ -54,8 +55,10 @@ public class RobotContainer {
                 .whileHeld(new RunShooterVelocity(mShooter, mIndexer, mChassis));
        new JoystickButton(mController, XboxController.Button.kY.value)
                .whenPressed(new ToggleGyro(mChassis));
+//        new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
+//                .whenPressed(new IndexerBurst(mIndexer, 0.20));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
-                .whenPressed(new IndexerBurst(mIndexer, 0.20));
+                .whenPressed(new ClimbServoActuate(mClimb));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)
 //                .whileHeld(new ClimbManage(mClimb));
         new JoystickButton(mController, XboxController.Button.kStart.value)

@@ -104,7 +104,7 @@ public class RunShooterVelocity extends CommandBase {
         } else {
             if (mIndexer.isAutomated) {
                 if (mIndexer.break_beam.get()) {
-                    mIndexer.setIndexer(-0.17);
+                    mIndexer.setIndexer(-0.24);
                 } else {
                     mIndexer.setIndexerVel(0);
                 }

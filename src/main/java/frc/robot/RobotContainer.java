@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.*;
 import frc.robot.commands.auton.AutonBasic;
 import frc.robot.commands.chassis.*;
@@ -15,6 +16,7 @@ import frc.robot.commands.indexer.IndexerToggle;
 import frc.robot.commands.intake.IntakeControl;
 import frc.robot.commands.shooter.*;
 import frc.robot.subsystems.*;
+import frc.robot.triggers.XboxTrigger;
 
 public class RobotContainer {
 
@@ -35,8 +37,9 @@ public class RobotContainer {
         mChassis.setDefaultCommand(new RunFieldCentricSwerve(mChassis));
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
         mClimb.setDefaultCommand(new ClimbManage(mClimb));
-//        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
-        mShooter.setDefaultCommand(new RunShooterVelocityTrigger(mShooter, mIndexer, mChassis));
+        mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
+//        mShooter.setDefaultCommand(new RunShooterVelocityTrigger(mShooter, mIndexer, mChassis));
+        mShooter.setDefaultCommand(new ShooterSpeedManage(mShooter, mChassis));
 
     }
 
@@ -47,8 +50,10 @@ public class RobotContainer {
                 .whenPressed(new ResetGyro(mChassis));
 //        new JoystickButton(mController, XboxController.Button.kA.value)
 //                .whileHeld(new ZeroAxes(mChassis));
+        new XboxTrigger(mController, XboxController.Axis.kLeftTrigger.value, 0.7)
+                .whileActiveOnce(new RunShooterVelocity(mShooter, mIndexer, mChassis));
         new JoystickButton(mController, XboxController.Button.kA.value)
-                .whileHeld(new IndexerToggle(mIndexer));
+                .whenPressed(new IndexerToggle(mIndexer));
         new JoystickButton(mController, XboxController.Button.kRightBumper.value)
                 .whenPressed(new ToggleAim(mChassis));
         new JoystickButton(mController, XboxController.Button.kX.value)

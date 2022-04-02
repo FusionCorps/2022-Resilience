@@ -15,8 +15,8 @@ public class Climb extends SubsystemBase {
 
     public boolean isClosed = true;
 
-    Servo servo_l;
-    Servo servo_r;
+    public Servo servo_l;
+    public Servo servo_r;
 
     public boolean isPause = true;
 
@@ -58,7 +58,17 @@ public class Climb extends SubsystemBase {
 
     public void setLeftServoAngle(double angle) {
         servo_l.setAngle(angle);
-        servo_r.setAngle(180-angle);
+        servo_r.setAngle(162-angle);
+    }
+
+    public void setServoAngles(double left, double right) {
+        servo_l.setAngle(left);
+        servo_r.setAngle(right);
+    }
+
+    public void setServoFree() {
+        servo_l.setDisabled();
+        servo_r.setDisabled();
     }
 
     public int getClimbPosKey() {

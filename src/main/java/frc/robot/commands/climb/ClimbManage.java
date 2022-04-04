@@ -28,11 +28,11 @@ public class ClimbManage extends CommandBase {
         int key;
         key = mClimb.getClimbPosKey();
 
-        if (mClimb.isClosed) {
-            mClimb.setServoAngles(52, 130);
-        } else {
-            mClimb.setServoAngles(115, 52);
-        }
+//        if (mClimb.isClosed) {
+//            mClimb.setServoAngles(52, 130);
+//        } else {
+//            mClimb.setServoAngles(115, 52);
+//        }
 
 
 

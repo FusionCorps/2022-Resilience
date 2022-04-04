@@ -48,7 +48,8 @@ public class Climb extends SubsystemBase {
         servo_l = new Servo(0);
         servo_r = new Servo(SERVO_R_ID);
 
-
+        servo_l.setAngle(52);
+        servo_r.setAngle(130);
 
     }
 

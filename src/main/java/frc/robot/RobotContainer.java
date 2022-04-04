@@ -6,10 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.*;
 import frc.robot.commands.auton.AutonBasic;
 import frc.robot.commands.chassis.*;
-import frc.robot.commands.climb.ClimbActivate;
-import frc.robot.commands.climb.ClimbManage;
-import frc.robot.commands.climb.ClimbPause;
-import frc.robot.commands.climb.ClimbServoActuate;
+import frc.robot.commands.climb.*;
 import frc.robot.commands.indexer.IndexerBurst;
 import frc.robot.commands.indexer.IndexerManage;
 import frc.robot.commands.indexer.IndexerToggle;
@@ -63,7 +60,7 @@ public class RobotContainer {
 //        new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
 //                .whenPressed(new IndexerBurst(mIndexer, 0.20));
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
-                .whenPressed(new ClimbServoActuate(mClimb));
+                .whileHeld(new ClimbServoActuateFree(mClimb));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)
 //                .whileHeld(new ClimbManage(mClimb));
         new JoystickButton(mController, XboxController.Button.kStart.value)

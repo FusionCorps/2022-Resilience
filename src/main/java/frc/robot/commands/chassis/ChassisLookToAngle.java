@@ -1,5 +1,6 @@
 package frc.robot.commands.chassis;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis;
@@ -12,6 +13,8 @@ public class ChassisLookToAngle extends CommandBase {
 // TODO: Make command that aligns wheels w/o movement overall
 
     Chassis mChassis;
+
+    SlewRateLimiter turnLimit;
 
     boolean reset;
 
@@ -33,6 +36,8 @@ public class ChassisLookToAngle extends CommandBase {
         mAngle = angle;
 
         mTime = time;
+
+        turnLimit = new SlewRateLimiter(4.5);
 
         addRequirements(mChassis);
     }
@@ -57,10 +62,10 @@ public class ChassisLookToAngle extends CommandBase {
             tx = 0;
         }
 
-        if (tx > 60) {
-            tx = 60;
-        } else if (tx < -60) {
-            tx = -60;
+        if (tx > 30) {
+            tx = 30;
+        } else if (tx < -30) {
+            tx = -30;
         }
 
 
@@ -68,7 +73,7 @@ public class ChassisLookToAngle extends CommandBase {
 
         mChassis.runSwerve(0,
                 0,
-                0.0135*tx + (tx/(abs(tx)+0.02))*0.006);
+                turnLimit.calculate(0.0135*tx + (tx/(abs(tx)+0.02))*0.006));
 
     }
 

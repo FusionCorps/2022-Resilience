@@ -57,8 +57,8 @@ public class Constants {
 
         public static double CLIMB_MIN_POS = -2048*100;
         public static double CLIMB_LOWER_POS = 0;
-        public static double CLIMB_UPPER_POS = 204001-2048*5;
-        public static double CLIMB_MAX_POS = 204001-2048*1.75;
+        public static double CLIMB_UPPER_POS = 204001-2048*15;
+        public static double CLIMB_MAX_POS = 204001-2048*6.00;
 
     }
 

@@ -89,8 +89,6 @@ public class RunShooterVelocity extends CommandBase {
 
         mShooter.setShooterVelocity(mShooter.target_velocity);
 
-        System.out.println(ty);
-
 
         if (mShooter.isShooting()) {
             mChassis.shooting = true;

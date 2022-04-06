@@ -17,7 +17,7 @@ public class Constants {
     public static int CODER_FR_ID = 12;
     public static int CODER_BR_ID = 13;
 
-    public static double INDEXER_TARGET = 0.9;
+    public static double INDEXER_TARGET = 0.8;
 
     public static double TRACK_WIDTH_METERS = 0.7112;
     public static double TRACK_LENGTH_METERS = 0.7112;

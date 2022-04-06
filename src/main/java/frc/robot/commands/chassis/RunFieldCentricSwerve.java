@@ -83,7 +83,7 @@ public class RunFieldCentricSwerve extends CommandBase {
         if (mChassis.aiming) {
             tx = mChassis.limelightTable.getEntry("tx").getDouble(0.0);
 
-            tx = tx + 29.4*(strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))));
+//            tx = tx + 29.4*(strLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI))));
 
             if (abs(tx) <= 0.8) {
                 tx = 0;
@@ -96,6 +96,10 @@ public class RunFieldCentricSwerve extends CommandBase {
             } else {
                 speed_K = 1.0;
             }
+
+            System.out.println("ts" + mChassis.limelightTable.getEntry("ts").getDouble(0.0));
+            System.out.println("ts0" + mChassis.limelightTable.getEntry("ts0").getDouble(0.0));
+            System.out.println("ts1" + mChassis.limelightTable.getEntry("ts1").getDouble(0.0));
 
 
 

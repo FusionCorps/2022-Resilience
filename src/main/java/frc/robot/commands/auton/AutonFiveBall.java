@@ -17,7 +17,7 @@ public class AutonFiveBall extends SequentialCommandGroup {
     Chassis mChassis;
     Shooter mShooter;
     Indexer mIndexer;
-    Intake mIntake;-
+    Intake mIntake;
 
     public AutonFiveBall(Chassis chassis, Shooter shooter, Indexer indexer, Intake intake) {
 

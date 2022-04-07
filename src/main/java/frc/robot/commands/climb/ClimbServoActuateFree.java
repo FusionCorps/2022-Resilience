@@ -10,7 +10,7 @@ public class ClimbServoActuateFree extends CommandBase {
 
     public ClimbServoActuateFree(Climb climb) {
         mClimb = climb;
-        addRequirements(mClimb);
+//        addRequirements(mClimb);
     }
 
     @Override

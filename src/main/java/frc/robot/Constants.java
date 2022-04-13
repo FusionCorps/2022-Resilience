@@ -12,10 +12,10 @@ public class Constants {
     public static int DRIVE_FR_ID = 4;
     public static int DRIVE_BR_ID = 5;
 
-    public static int CODER_FL_ID = 2;
-    public static int CODER_BL_ID = 11;
-    public static int CODER_FR_ID = 12;
-    public static int CODER_BR_ID = 13;
+    public static int CODER_FL_ID = 12;
+    public static int CODER_BL_ID = 2;
+    public static int CODER_FR_ID = 13;
+    public static int CODER_BR_ID = 11;
 
     public static double INDEXER_TARGET = 0.8;
 
@@ -39,7 +39,7 @@ public class Constants {
     public static double DRIVE_kD = 0.60;
 
     public static double STEERING_RATIO = 12.8;
-    public static double DRIVING_RATIO = 6.86;
+    public static double DRIVING_RATIO = 6.86*6.86/6.75;
 
     public static double WHEEL_RADIUS_METERS = 0.0508;
 

@@ -28,7 +28,7 @@ public class IndexerManageTimed extends CommandBase {
     public void execute() {
         if (mIndexer.isAutomated) {
             if (mIndexer.break_beam.get()) {
-                mIndexer.setIndexer(-0.24);
+                mIndexer.setIndexer(-0.22);
             } else {
                 mIndexer.setIndexerVel(0);
             }

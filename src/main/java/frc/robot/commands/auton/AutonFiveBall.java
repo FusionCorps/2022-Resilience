@@ -33,7 +33,7 @@ public class AutonFiveBall extends SequentialCommandGroup {
 
         double t_first = 0.48*7/4;
 
-        double t_sec = 0.48*9/4 - 0.1;
+        double t_sec = 0.48*9/4 - 0.03;
 
         addCommands(
             new ResetGyro(mChassis),

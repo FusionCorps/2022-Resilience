@@ -40,8 +40,8 @@ public class AutonAdvanced extends SequentialCommandGroup {
                 new ParallelCommandGroup(new AutonTransition(mChassis, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5),
                         new RunIntakeTimed(mIntake, 0.65, 0.5),
                         new IndexerManageTimed(mIndexer, 0.5)),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5),
-                new AutonTransition(mChassis, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 0.5),
+                new AutonTransition(mChassis, 0.0, 0.0, 0.6, 0.0, 0.0, 0.0, 0.5),
                 new ToggleAim(mChassis),
                 new ParallelCommandGroup(
                         new SequentialCommandGroup(

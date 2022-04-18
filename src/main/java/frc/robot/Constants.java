@@ -39,7 +39,7 @@ public class Constants {
     public static double DRIVE_kD = 0.60;
 
     public static double STEERING_RATIO = 12.8;
-    public static double DRIVING_RATIO = 6.86*6.86/6.75;
+    public static double DRIVING_RATIO = 6.86*6.86/6.75*1.25;
 
     public static double WHEEL_RADIUS_METERS = 0.0508;
 

@@ -40,6 +40,11 @@ public class AutonFiveBall extends SequentialCommandGroup {
 
         double t_fourth = 1.3;
 
+
+        double t_fifth = 0.4;
+
+        double t_sixth = 0.8;
+
         addCommands(
                 new ResetGyro(mChassis),
                 new ParallelCommandGroup(
@@ -82,18 +87,48 @@ public class AutonFiveBall extends SequentialCommandGroup {
 
                 new ParallelCommandGroup(
                         new SequentialCommandGroup(
-                                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, t_sec),
+                                new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.0, 0.75, 0.0, t_sec-0.05),
                                 new AutonTransitionFC(mChassis, 0.0, 0.75, 0.0, -0.45, 0.0, 0.0, t_sec),
                                 new AutonTransitionFC(mChassis, -0.45, 0.0, 0.0, 0.0, 0.0, 0.0, t_sec/2)
                         ),
-                        new RunIntakeTimed(mIntake, 0.7, 2.5*t_sec),
-                        new IndexerManageTimed(mIndexer, 2.5*t_sec)
+                        new RunIntakeTimed(mIntake, 0.7, 2.5*t_sec - 0.05),
+                        new IndexerManageTimed(mIndexer, 2.5*t_sec - 0.05)
                 ),
 
                 new ParallelCommandGroup(
-                        new ChassisLookToAngle(mChassis, -135, 0.5),
-                        new RunIntakeTimed(mIntake, 0.7, 0.5),
-                        new SetShooterSpeedTimed(mShooter, mIndexer, 0.5)
+                        new ChassisLookToAngle(mChassis, -135, 0.4),
+                        new RunIntakeTimed(mIntake, 0.7, 0.4),
+                        new SetShooterSpeedTimed(mShooter, mIndexer, 0.4)
+                ),
+
+                new ToggleAim(mChassis),
+
+                new ParallelCommandGroup(
+                        new SequentialCommandGroup(
+                                new RunIntakeTimed(mIntake, 0.75, 0.5),
+                                new RunIntakeTimed(mIntake, 0.0, 0.9)
+                        ),
+                        new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 1.4),
+                        new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 1.4)
+                ),
+
+                new ParallelCommandGroup(
+                    new SequentialCommandGroup(
+                            new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.08, 0.8, 0.5, t_third),
+                            new ChassisDriveAutonFCAndAngle(mChassis,0.1, 0.8, 60, t_fourth),
+                            new AutonTransitionFC(mChassis, 0.1, 0.8, 0.0, 0.0, 0.0, 0.0, t_third)
+                    ),
+                        new RunIntakeTimed(mIntake, 0.7, 2*t_third + t_fourth)
+                ),
+
+                new ParallelCommandGroup(
+                        new SequentialCommandGroup(
+                                new AutonTransitionFC(mChassis, -0.1, 0.0, 0.0, 0.0, -1.15, 0.5, t_fifth),
+                                new ChassisDriveAutonFCAndAngle(mChassis,0.0, -1.15, 225, t_sixth),
+                                new AutonTransitionFC(mChassis, 0.0, -1.15, 0.0, 0.0, 0.0, 0.0, t_fifth)
+                        ),
+                        new RunIntakeTimed(mIntake, 0.7, 2*t_fifth + t_sixth),
+                        new SetShooterSpeedTimed(mShooter, mIndexer, 2*t_fifth + t_sixth)
                 ),
 
                 new ToggleAim(mChassis),
@@ -105,15 +140,6 @@ public class AutonFiveBall extends SequentialCommandGroup {
                         ),
                         new ChassisDriveAutonFC(mChassis, 0.0, 0.0, 0.0, 1.5),
                         new RunShooterVelocityTimed(mShooter, mIndexer, mChassis, 1.5)
-                ),
-
-                new ParallelCommandGroup(
-                    new SequentialCommandGroup(
-                            new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.0, 0.8, 0.5, t_third),
-                            new ChassisDriveAutonFCAndAngle(mChassis,0.0, 0.8, 45, t_fourth),
-                            new AutonTransitionFC(mChassis, 0.0, 0.8, 0.0, 0.0, 0.0, 0.0, t_third)
-                    ),
-                        new RunIntakeTimed(mIntake, 0.7, 2*t_third + t_fourth)
                 )
 
         );

@@ -80,8 +80,10 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
+
             // wrong command chucklenuts
-            double v_calc = 1.05*(9248 - 107.4*ty);
+            // TODO: WRONG COMMAND CHUCKLENUTS
+            double v_calc = 1*(9248 - 107.4*ty);
 
             mShooter.target_velocity = mShooter.shootK * v_calc;
 

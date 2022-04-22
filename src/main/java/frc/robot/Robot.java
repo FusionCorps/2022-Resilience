@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
   // do not use its not right uhhhh
 
   private Command m_autonomousTwoBall = new AutonAdvanced(mChassis, mShooter, mIndexer, mIntake);
+  private Command m_autonomousTwoBallWallShorter = new AutonTwoBallWallShorten(mChassis, mShooter, mIndexer, mIntake);
   private Command m_autonomousOneBall = new AutonBasic(mChassis, mShooter, mIndexer);
   private Command m_autonomousThreeBall = new AutonThreeBall(mChassis, mShooter, mIndexer, mIntake);
   private Command m_autonomousYoinkySploinky = new AutonAdvancedPlusYoink(mChassis, mShooter, mIndexer, mIntake);
@@ -97,7 +98,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_autonomousTwoBall;
+    m_autonomousCommand = m_autonomousThreeBall;
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",

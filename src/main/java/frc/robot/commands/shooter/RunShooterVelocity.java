@@ -71,7 +71,8 @@ public class RunShooterVelocity extends CommandBase {
 
 //            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
 //        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-        double v_calc = 1.018*1.035*(9248 - 107.4*ty);
+//        double v_calc = 1.018*1.035*(9248 - 107.4*ty);
+        double v_calc = 14000;
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
 

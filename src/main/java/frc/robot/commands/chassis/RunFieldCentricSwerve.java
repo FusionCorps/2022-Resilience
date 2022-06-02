@@ -55,8 +55,8 @@ public class RunFieldCentricSwerve extends CommandBase {
 //        double axis1 = responseCurve.calculate(mController.getRawAxis(1));
 //        double axis4 = responseCurve.calculate(mController.getRawAxis(4));
 
-        double axis0 = mController.getRawAxis(0);
-        double axis1 = mController.getRawAxis(1);
+        double axis0 = 0.4*mController.getRawAxis(0);
+        double axis1 = 0.4*mController.getRawAxis(1);
         double axis4 = mController.getRawAxis(4);
 
         if (axis0*axis0 + axis1*axis1 <= 0.0016) {

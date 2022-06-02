@@ -41,6 +41,8 @@ public class AutonTwoBallWallShorten extends SequentialCommandGroup {
                     new RunIntakeTimed(mIntake, -0.75, t_init)
             ),
 
+        new ChassisDriveAuton(mChassis, 0.0, 0.0, 0.0, 2.0),
+
 //            new ParallelCommandGroup(
 //                new SequentialCommandGroup(
 //                    new AutonTransitionFC(mChassis, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0, t_first),

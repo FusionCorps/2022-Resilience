@@ -32,6 +32,8 @@ public class Constants {
     public static double AXIS_kP = 0.07;
     public static double AXIS_kI = 0.0;
     public static double AXIS_kD = 0.30;
+    
+    // note SDS default 0 0.2 0 0.1
 
     public static double DRIVE_kF = 0.0;
     public static double DRIVE_kP = 0.07;

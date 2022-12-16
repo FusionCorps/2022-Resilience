@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Chassis;
 
 public class ChassisWheelsAlign extends CommandBase {
-    // TODO: Make command that aligns wheels w/o movement overall
+
+    // command that sets wheel angles to match the desired positions, can be used to reduce the importance
+    // of starting configuration for autonomous
 
     Chassis mChassis;
-
-    boolean reset;
 
     double mFwdSpeed;
     double mStrSpeed;
@@ -35,6 +35,7 @@ public class ChassisWheelsAlign extends CommandBase {
         timer.reset();
         timer.start();
 
+        // on passing the parameters, this solves for the angle without passing any input to drive motors
         mChassis.solveAngles(-mFwdSpeed, -mStrSpeed, mRotSpeed);
 
 
@@ -54,7 +55,6 @@ public class ChassisWheelsAlign extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-//        mChassis.runSwerve(0.0, 0.0, 0.0);
 
     }
 

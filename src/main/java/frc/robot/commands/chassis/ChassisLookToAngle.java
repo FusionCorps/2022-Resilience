@@ -10,7 +10,10 @@ import static java.lang.Math.abs;
 import static java.lang.StrictMath.PI;
 
 public class ChassisLookToAngle extends CommandBase {
-// TODO: Make command that aligns wheels w/o movement overall
+
+    // using gyro to turn in place to a specific angle, all code shared with:
+    // ChassisDriveAutonFCAndAngle.java
+    // so look there for documentation.
 
     Chassis mChassis;
 

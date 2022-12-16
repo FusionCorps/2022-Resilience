@@ -6,8 +6,9 @@ import frc.robot.subsystems.Chassis;
 
 public class ChassisDriveAuton extends CommandBase {
 
-    // TODO: Make command that aligns wheels w/o movement overall
+    // command to put inputs to swerve base over a period of time
 
+    // variables to initialize
     Chassis mChassis;
 
     boolean reset;
@@ -33,9 +34,11 @@ public class ChassisDriveAuton extends CommandBase {
 
     @Override
     public void initialize() {
+        // start timer
         timer.reset();
         timer.start();
 
+        // align wheels to reduce the effect of slop
         mChassis.solveAngles(-mFwdSpeed, -mStrSpeed, mRotSpeed);
 
 
@@ -43,18 +46,20 @@ public class ChassisDriveAuton extends CommandBase {
 
     @Override
     public void execute() {
-
+        // pass over period of time
         mChassis.runSwerve(-mFwdSpeed, mStrSpeed, mRotSpeed);
 
     }
 
     @Override
     public boolean isFinished() {
+        // check timer
         return  timer.hasElapsed(mTime);
     }
 
     @Override
     public void end(boolean interrupted) {
+        // stop running
         mChassis.runSwerve(0.0, 0.0, 0.0);
 
     }

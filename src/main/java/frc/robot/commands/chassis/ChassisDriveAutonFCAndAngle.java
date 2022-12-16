@@ -12,13 +12,13 @@ import static java.lang.StrictMath.PI;
 
 public class ChassisDriveAutonFCAndAngle extends CommandBase {
 
-    // TODO: Make command that aligns wheels w/o movement overall
+    // Pass FC parameters for x/y movement, use gyro to look at a specific angle.
+    // Would have been used for 4 ball auton, but never tested in comp.
 
     Chassis mChassis;
 
+    // limiter to avoid snapping to angle too aggressively
     SlewRateLimiter turnLimit;
-
-    boolean reset;
 
     double mFwdSpeed;
     double mStrSpeed;
@@ -48,15 +48,14 @@ public class ChassisDriveAutonFCAndAngle extends CommandBase {
         timer.reset();
         timer.start();
 
-
-
         mChassis.solveAngles(-mFwdSpeed, mStrSpeed, 0);
-
 
     }
 
     @Override
     public void execute() {
+
+        // two forms of aiming implemented; one from LL, one from gyro
 
         angle = -(mChassis.ahrs.getAngle() % 360);
 
@@ -65,11 +64,12 @@ public class ChassisDriveAutonFCAndAngle extends CommandBase {
 
         tx_gyro = -mChassis.ahrs.getAngle() + mAngle;
 
-
+        // gyro max acceptable error
         if (abs(tx_gyro) <= 0.8) {
             tx_gyro = 0;
         }
 
+        // capping gyro angle at +/- 30 in order to prevent erratic behavior
         if (tx_gyro > 30) {
             tx_gyro = 30;
         } else if (tx_gyro < -30) {
@@ -79,6 +79,7 @@ public class ChassisDriveAutonFCAndAngle extends CommandBase {
         double axis1 = -mFwdSpeed;
         double axis0 = mStrSpeed;
 
+        // passing parameters to chassis, depending on whether or not LL is being used.
         if (mChassis.aiming) {
             tx = mChassis.limelightTable.getEntry("tx").getDouble(0.0);
 
@@ -104,8 +105,6 @@ public class ChassisDriveAutonFCAndAngle extends CommandBase {
             } catch (Exception e) {
             }
 
-//            System.out.println("tx: " + tx);
-
         } else {
             try {
                 mChassis.runSwerve((axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI))),
@@ -118,11 +117,13 @@ public class ChassisDriveAutonFCAndAngle extends CommandBase {
 
     }
 
+    // timer check
     @Override
     public boolean isFinished() {
         return  timer.hasElapsed(mTime);
     }
 
+    // stop robot
     @Override
     public void end(boolean interrupted) {
         mChassis.runSwerve(0.0, 0.0, 0.0);

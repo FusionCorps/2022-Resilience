@@ -13,15 +13,18 @@ import static frc.robot.Constants.Indexer.*;
 
 public class Indexer extends SubsystemBase {
 
+    // motor and sensor
     WPI_TalonFX indexer0;
     public DigitalInput break_beam;
 
+    // toggle var
     public boolean isAutomated = true;
 
     public Indexer() {
+        // IR breakbeam and motor setup
         indexer0 = new WPI_TalonFX(INDEXER_ID);
         break_beam = new DigitalInput(IR_PORT);
-
+        // Motor Config
         indexer0.setNeutralMode(NeutralMode.Brake);
 
         indexer0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);

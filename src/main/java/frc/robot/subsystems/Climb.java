@@ -10,17 +10,22 @@ import static frc.robot.Constants.Climb.*;
 
 public class Climb extends SubsystemBase {
 
+    // two synced motors
     WPI_TalonFX climb0;
     WPI_TalonFX climb1;
 
+    // servo toggle var
     public boolean isClosed = true;
 
+    // synced servos
     public Servo servo_l;
     public Servo servo_r;
 
+    // climb toggle var
     public boolean isPause = true;
 
     public Climb() {
+        // climb motor configs
         climb0 = new WPI_TalonFX(Constants.Climb.CLIMB_0_ID);
         climb1 = new WPI_TalonFX(Constants.Climb.CLIMB_1_ID);
 
@@ -32,6 +37,7 @@ public class Climb extends SubsystemBase {
         climb0.configSupplyCurrentLimit(limits);
         climb1.configSupplyCurrentLimit(limits);
 
+        // sync
         climb1.follow(climb0);
         climb1.setInverted(InvertType.FollowMaster);
 
@@ -45,6 +51,7 @@ public class Climb extends SubsystemBase {
         climb0.config_kI(0, CLIMB_kI);
         climb0.config_kD(0, CLIMB_kD);
 
+        // servo setup
         servo_l = new Servo(0);
         servo_r = new Servo(SERVO_R_ID);
 
@@ -78,14 +85,19 @@ public class Climb extends SubsystemBase {
 
         int key;
 
+        // climb below min limit
         if (climb0.getSelectedSensorPosition() < CLIMB_MIN_POS) {
             key = 0;
+        // climb between min + lower
         } else if (climb0.getSelectedSensorPosition() < CLIMB_LOWER_POS) {
             key = 1;
+        // middle/default position
         } else if (climb0.getSelectedSensorPosition() < CLIMB_UPPER_POS) {
             key = 2;
+        // upper pos
         } else if (climb0.getSelectedSensorPosition() < CLIMB_MAX_POS){
             key = 3;
+        // above max
         } else {
             key = 4;
         }

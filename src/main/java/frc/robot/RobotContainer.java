@@ -17,6 +17,8 @@ import frc.robot.triggers.XboxTrigger;
 
 public class RobotContainer {
 
+    // subsystems and controller
+    // may not be best coding practice
     public static final Chassis mChassis = new Chassis();
     public static final Intake mIntake = new Intake();
     public static final XboxController mController = new XboxController(0);
@@ -35,34 +37,43 @@ public class RobotContainer {
         mIntake.setDefaultCommand(new IntakeControl(mIntake));
         mClimb.setDefaultCommand(new ClimbManage(mClimb));
         mIndexer.setDefaultCommand(new IndexerManage(mIndexer));
+        // deprecated command
 //        mShooter.setDefaultCommand(new RunShooterVelocityTrigger(mShooter, mIndexer, mChassis));
         mShooter.setDefaultCommand(new ShooterSpeedManage(mShooter, mChassis));
 
     }
 
-    JoystickButton mBbutton = new JoystickButton(mController, XboxController.Button.kB.value);
+
 
     private void configureButtonBindings() {
+        // reset gyro heading on B
         new JoystickButton(mController, XboxController.Button.kB.value)
                 .whenPressed(new ResetGyro(mChassis));
+
+        // old testing command, potentially still useful
 //        new JoystickButton(mController, XboxController.Button.kA.value)
 //                .whileHeld(new ZeroAxes(mChassis));
+        // shooting on trigger
         new XboxTrigger(mController, XboxController.Axis.kLeftTrigger.value, 0.7)
                 .whileActiveOnce(new RunShooterVelocity(mShooter, mIndexer, mChassis));
+        // index toggle on A
         new JoystickButton(mController, XboxController.Button.kA.value)
                 .whenPressed(new IndexerToggle(mIndexer));
+        // aiming on RB
         new JoystickButton(mController, XboxController.Button.kRightBumper.value)
                 .whenPressed(new ToggleAim(mChassis));
+        // shooting on X
         new JoystickButton(mController, XboxController.Button.kX.value)
                 .whileHeld(new RunShooterVelocity(mShooter, mIndexer, mChassis));
+        // toggle gyro Y
        new JoystickButton(mController, XboxController.Button.kY.value)
                .whenPressed(new ToggleGyro(mChassis));
-//        new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
-//                .whenPressed(new IndexerBurst(mIndexer, 0.20));
+       // toggle climb servo locks on LB
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
                 .whileHeld(new ClimbServoActuateFree(mClimb));
 //        new JoystickButton(mController, XboxController.Button.kRightBumper.value)
 //                .whileHeld(new ClimbManage(mClimb));
+        // Start/Back control Climb
         new JoystickButton(mController, XboxController.Button.kStart.value)
                 .whileHeld(new ClimbActivate(mClimb));
         new JoystickButton(mController, XboxController.Button.kBack.value)

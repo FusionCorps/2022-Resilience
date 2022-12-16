@@ -24,6 +24,7 @@ public class Shooter extends SubsystemBase {
     public double min_vel;
     public double max_vel;
 
+    // put shootK to shuffleboard
     private ShuffleboardTab tab = Shuffleboard.getTab("General");
     public NetworkTableEntry shootKTab =
             tab.add("shootK", 1.0)
@@ -33,6 +34,7 @@ public class Shooter extends SubsystemBase {
                     .getEntry();
 
     public Shooter() {
+        // motor setup
         shooter0 = new WPI_TalonFX(Constants.Shooter.SHOOTER_ID);
         shooter0.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
@@ -46,10 +48,11 @@ public class Shooter extends SubsystemBase {
         target = Constants.Shooter.SHOOTER_TARGET;
         target_velocity = Constants.Shooter.SHOOTER_TARGET * 21000;
 
-
+        // raise/lower power
         shootK = 1.0;
         shootKTab.setDouble(shootK);
 
+        // acceptable error
         min_vel = Constants.Shooter.SHOOTER_LOWER_VEL;
         max_vel = Constants.Shooter.SHOOTER_UPPER_VEL;
 
@@ -63,6 +66,7 @@ public class Shooter extends SubsystemBase {
         shooter0.set(TalonFXControlMode.Velocity, vel);
     }
 
+    // testing
     public void setShooter_kF(double kf) {
         shooter0.config_kF(0, kf);
     }
@@ -71,11 +75,13 @@ public class Shooter extends SubsystemBase {
         return shooter0.getSelectedSensorVelocity();
     }
 
+    // checking acceptable error
     public boolean isTarget() {
         double v = shooter0.getSelectedSensorVelocity();
         return (v > min_vel && v < max_vel);
     }
 
+    // functionally same - more allowable error
     public boolean isShooting() {
         double v = shooter0.getSelectedSensorVelocity();
         return (v > (target*20000 - 2000) && v < (target*20000 + 2000));

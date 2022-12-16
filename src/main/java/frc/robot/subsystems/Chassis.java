@@ -115,6 +115,7 @@ public class Chassis extends SubsystemBase {
 
     public void runSwerve(double fwd, double str, double rot_temp) {
 
+        // convenience for negating
         double rot = rot_temp;
         // happens when we swap modules out, be careful
         // nvm encoders off 180

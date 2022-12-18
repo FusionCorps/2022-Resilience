@@ -22,7 +22,8 @@ public class RunShooterVelocityTimed extends CommandBase {
     Chassis mChassis;
     NetworkTable limelightTable;
 
-    boolean isSpunUp = false;
+    // running the shooter for auton
+    // same internals, but with a timer
 
     Timer mTimer = new Timer();
     double mTime;
@@ -47,32 +48,11 @@ public class RunShooterVelocityTimed extends CommandBase {
 
     @Override
     public void execute() {
-        // TODO: Make this limelight dependent
 
-        double axis0 = mController.getRawAxis(0);
-        double axis1 = mController.getRawAxis(1);
-        double axis4 = -mController.getRawAxis(4);
-
-        double angle = mChassis.ahrs.getAngle();
-
-        double fwd = fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI)));
-        double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
         mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
 
-
-//            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
-        // double temp = 0.49 - 0.009*ty; if battery low
-
-        // TODO: write code dependent on voltage instead
-
-
-        // shoot k 0.95 above 1.00 below
-
-//            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
-//        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-//        double v_calc = 10000 - 250/2*ty;
         double v_calc = 1.018*1.065*(9248 - 107.4*ty);
 
 

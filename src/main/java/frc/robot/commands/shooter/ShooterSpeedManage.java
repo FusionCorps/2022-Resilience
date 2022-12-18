@@ -9,6 +9,9 @@ import static frc.robot.RobotContainer.mController;
 
 public class ShooterSpeedManage extends CommandBase {
 
+    // converts D-Pad input into speed adjustments.
+    // also checks ShuffleBoard for updates
+
     Shooter mShooter;
     Chassis mChassis;
 
@@ -27,6 +30,8 @@ public class ShooterSpeedManage extends CommandBase {
             mShooter.shootK -= 0.001;
         }
         mShooter.shootKTab.setDouble(mShooter.shootK);
+
+        // rev up when aiming at target
         if (mChassis.aiming) {
             mShooter.setShooter(0.41);
         } else {

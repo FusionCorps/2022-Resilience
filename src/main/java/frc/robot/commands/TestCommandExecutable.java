@@ -8,6 +8,8 @@ import static frc.robot.RobotContainer.mController;
 
 public class TestCommandExecutable extends CommandBase {
 
+    // for debugging triggers
+
     Chassis mChassis;
 
     public TestCommandExecutable(Chassis chassis) {

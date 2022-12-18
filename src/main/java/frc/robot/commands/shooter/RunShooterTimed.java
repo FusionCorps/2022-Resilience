@@ -21,6 +21,9 @@ public class RunShooterTimed extends CommandBase {
     NetworkTable limelightTable;
     double mTime;
 
+    // shooter running but for auton
+    // replaced by velocity version
+
     private Timer timer = new Timer();
 
     private SlewRateLimiter fwdLimiter = new SlewRateLimiter(2.5);

@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class XboxTrigger extends Trigger {
 
+    // Special trigger to run shooter command from the Right Triggers
+    // actually pretty useful, might use for other stuff in the future
+
     XboxController mController;
     int axis_val;
     double threshold;

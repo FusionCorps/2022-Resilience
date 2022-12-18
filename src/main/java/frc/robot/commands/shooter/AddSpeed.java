@@ -7,6 +7,8 @@ public class AddSpeed extends InstantCommand {
 
     Shooter mShooter;
 
+    // function to add/remove speed from flywheel
+
     public AddSpeed(Shooter shooter) {
         mShooter = shooter;
         addRequirements(mShooter);

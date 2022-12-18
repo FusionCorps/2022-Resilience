@@ -15,6 +15,8 @@ import static java.lang.StrictMath.PI;
 
 public class RunShooter extends CommandBase {
 
+    // old shooter default command
+
     Shooter mShooter;
     Indexer mIndexer;
     Chassis mChassis;
@@ -32,30 +34,19 @@ public class RunShooter extends CommandBase {
 
     @Override
     public void execute() {
-        // TODO: Make this limelight dependent
 
+        // polling controller for shoot on the move, never really worked
         double axis0 = mController.getRawAxis(0);
         double axis1 = mController.getRawAxis(1);
-        double axis4 = -mController.getRawAxis(4);
 
-         double angle = mChassis.ahrs.getAngle();
+        double angle = mChassis.ahrs.getAngle();
 
-        double fwd = fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI)));
-        double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
         mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
 
-
-//            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
-            // double temp = 0.49 - 0.009*ty; if battery low
-
-            // TODO: write code dependent on voltage instead
-
-
-            // shoot k 0.95 above 1.00 below
-
-//            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
+            // cubic curve of best fit
+            // ultimately too pressure dependent to be good for competition
             double v_calc = 0.466 - 0.00403 * ty + 0.000331*pow(ty, 2) - 0.0000213*pow(ty, 3);
 
             mShooter.target = mShooter.shootK*v_calc;
@@ -69,16 +60,17 @@ public class RunShooter extends CommandBase {
         mShooter.setShooter(mShooter.target);
 
 
-
+        // pass var to chassis
+        // redundant, should just make an accessor function
         if (mShooter.isShooting()) {
             mChassis.shooting = true;
         } else {
             mChassis.shooting = false;
         }
 
+        // spin up indexer when ready to fire
         if (mShooter.isTarget()) {
             mIndexer.setIndexer(-0.17);
-            System.out.println(mShooter.target);
         } else {
             mIndexer.setIndexer(0.0);
         }

@@ -9,6 +9,8 @@ import static frc.robot.Constants.Intake.INTAKE_ID;
 
 public class Intake extends SubsystemBase {
 
+    // one motor subsys with setter func
+
     private WPI_TalonFX intake0 = new WPI_TalonFX(INTAKE_ID);
 
     public Intake() {

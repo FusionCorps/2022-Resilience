@@ -29,8 +29,10 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
 
-  // do not use its not right uhhhh
 
+  // yes we did make an auton selector this offseason
+  // this was uh
+  // not good
   private Command m_autonomousTwoBall = new AutonAdvanced(mChassis, mShooter, mIndexer, mIntake);
   private Command m_autonomousTwoBallWallShorter = new AutonTwoBallWallShorten(mChassis, mShooter, mIndexer, mIntake);
   private Command m_autonomousOneBall = new AutonBasic(mChassis, mShooter, mIndexer);
@@ -50,17 +52,19 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    // zero swerve modules on wakeup
     mChassis.comboFR.zero();
     mChassis.comboBR.zero();
     mChassis.comboFL.zero();
     mChassis.comboBL.zero();
 
     new Thread(() -> {
+      // start driver cam
       UsbCamera camera = CameraServer.startAutomaticCapture();
       camera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 160, 120, 30);
     }).start();
 
-    // Power Slider
+    // Power Slider (it doesn't work we just used ShuffleBoard instead)
     SmartDashboard.putNumber("DB/Slider 0", 1.00);
 
   }
@@ -80,11 +84,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-//    try {
-//      mChassis.chassisWriter.append(mChassis.getGyroData() + "\n");
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
 
   }
 
@@ -98,16 +97,9 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    // pick the right auton here
     m_autonomousCommand = m_autonomousTwoBallWallShorter;
 
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

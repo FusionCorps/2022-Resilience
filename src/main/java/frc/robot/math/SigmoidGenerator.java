@@ -4,6 +4,9 @@ import static java.lang.Math.exp;
 
 public class SigmoidGenerator {
 
+    // Class to handle a response curve
+    // ended up not using, but could be fun to play around with
+
     double k;
 
     public SigmoidGenerator(double growthRate) {

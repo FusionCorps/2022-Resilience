@@ -10,6 +10,8 @@ import static frc.robot.RobotContainer.mController;
 
 public class IntakeControl extends CommandBase {
 
+    // running intake from Trigger Control
+
     private SlewRateLimiter indexLimit = new SlewRateLimiter(5.0);
     Intake mIntake;
 
@@ -20,16 +22,15 @@ public class IntakeControl extends CommandBase {
 
     @Override
     public void execute() {
+        // extake from D-Pad
         if (mController.getPOV() == 180) {
             mIntake.runIntake(-0.6);
         } else {
+            // scalar multiplier
             mIntake.runIntake(indexLimit.calculate(
                     (mController.getRightTriggerAxis())
                             * Constants.INDEXER_TARGET));
         }
-//        System.out.println(indexLimit.calculate(
-//                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())
-//                        * Constants.INDEXER_TARGET));
     }
 
     @Override

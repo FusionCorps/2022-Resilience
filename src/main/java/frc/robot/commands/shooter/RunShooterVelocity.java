@@ -24,8 +24,6 @@ public class RunShooterVelocity extends CommandBase {
     Chassis mChassis;
     NetworkTable limelightTable;
 
-    boolean isSpunUp = false;
-
     Timer mTimer = new Timer();
 
     private SlewRateLimiter fwdLimiter = new SlewRateLimiter(2.5);
@@ -46,60 +44,44 @@ public class RunShooterVelocity extends CommandBase {
 
     @Override
     public void execute() {
-        // TODO: Make this limelight dependent
 
-        double axis0 = mController.getRawAxis(0);
-        double axis1 = mController.getRawAxis(1);
-        double axis4 = -mController.getRawAxis(4);
-
-        double angle = mChassis.ahrs.getAngle();
-
-        double fwd = fwdLimiter.calculate(axis1*cos(angle/360*(2*PI)) + axis0*sin(angle/360*(2*PI)));
-        double str = fwdLimiter.calculate(axis1*sin(angle/360*(2*PI)) - axis0*cos(angle/360*(2*PI)));
         double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
         mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
-//        mShooter.shootK = SmartDashboard.getNumber("DB/Slider 0", 1.0);
 
-//            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
-        // double temp = 0.49 - 0.009*ty; if battery low
-
-        // TODO: write code dependent on voltage instead
-
-
-        // shoot k 0.95 above 1.00 below
-
-//            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
-//        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-//        double v_calc = 1.018*1.035*(9248 - 107.4*ty);
-        double v_calc = 14000;
+        // linear approximation from LL values
+        double v_calc = 1.018*1.035*(9248 - 107.4*ty);
 
         mShooter.target_velocity = mShooter.shootK*v_calc;
 
+        // bound to prevent jams/overheating
         if (mShooter.target_velocity > SHOOTER_MAX_V) {
             mShooter.target_velocity = SHOOTER_MAX_V;
         } else if (mShooter.target_velocity < SHOOTER_MIN_V) {
             mShooter.target_velocity = SHOOTER_MIN_V;
         }
 
+        // target thresholds
         mShooter.min_vel = mShooter.target_velocity - 120;
         mShooter.max_vel = mShooter.target_velocity + 120;
 
 
 
-
+        // feed to PID controller
         mShooter.setShooterVelocity(mShooter.target_velocity);
 
-
+        // pass to chassis
         if (mShooter.isShooting()) {
             mChassis.shooting = true;
         } else {
             mChassis.shooting = false;
         }
 
+        // activate indexer based on shooter state
         if (mShooter.isTarget()) {
             mIndexer.setIndexer(-0.24);
             System.out.println(mShooter.target);
+        // takes over indexer manage to load next while shooting
         } else {
             if (mIndexer.isAutomated) {
                 if (mIndexer.break_beam.get()) {
@@ -117,6 +99,7 @@ public class RunShooterVelocity extends CommandBase {
 
     }
 
+    // stop all motors
     @Override
     public void end(boolean isFinished) {
         mShooter.setShooter(0.0);

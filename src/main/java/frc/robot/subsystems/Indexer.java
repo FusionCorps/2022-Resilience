@@ -24,6 +24,7 @@ public class Indexer extends SubsystemBase {
         // IR breakbeam and motor setup
         indexer0 = new WPI_TalonFX(INDEXER_ID);
         break_beam = new DigitalInput(IR_PORT);
+
         // Motor Config
         indexer0.setNeutralMode(NeutralMode.Brake);
 
@@ -38,6 +39,7 @@ public class Indexer extends SubsystemBase {
 
     }
 
+    // configs, and two basic motor setter functions
     public void configIndexer() {
         indexer0.setNeutralMode(NeutralMode.Brake);
     }

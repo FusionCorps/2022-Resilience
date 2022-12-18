@@ -6,6 +6,9 @@ import frc.robot.subsystems.Chassis;
 
 public class ZeroAxes extends CommandBase {
 
+    // zero EVERYTHING
+    // mainly a debug step
+
     private final Chassis cChassis;
 
     public ZeroAxes(Chassis chassis) {

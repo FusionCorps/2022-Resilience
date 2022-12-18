@@ -22,8 +22,10 @@ import static java.lang.Double.max;
 
 public class Chassis extends SubsystemBase {
 
+    // for auto recording, logging
     public FileWriter chassisWriter;
 
+    // toggle variables
     public boolean aiming = false;
     public boolean shooting = false;
 
@@ -31,8 +33,10 @@ public class Chassis extends SubsystemBase {
 
     public boolean isUsingGyro = true;
 
+    // LL NetworkTable
     public NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
+    // set up drive motors
     private static WPI_TalonFX drive0 = new WPI_TalonFX(Constants.DRIVE_FL_ID);
     private static WPI_TalonFX drive1 = new WPI_TalonFX(Constants.DRIVE_BL_ID);
     private static WPI_TalonFX drive2 = new WPI_TalonFX(Constants.DRIVE_FR_ID);
@@ -43,17 +47,19 @@ public class Chassis extends SubsystemBase {
     private static WPI_TalonFX axis2 = new WPI_TalonFX(Constants.AXIS_FR_ID);
     private static WPI_TalonFX axis3 = new WPI_TalonFX(Constants.AXIS_BR_ID);
 
+    // CanCoders too
     CANCoder coder0 = new CANCoder(Constants.CODER_FL_ID); // FL
     CANCoder coder1 = new CANCoder(Constants.CODER_BL_ID); // BL
     CANCoder coder2 = new CANCoder(Constants.CODER_FR_ID); // FR
     CANCoder coder3 = new CANCoder(Constants.CODER_BR_ID); // BR
 
-
+    // four swerve modules
     public SwerveCombo comboFL;
     public SwerveCombo comboBL;
     public SwerveCombo comboFR;
     public SwerveCombo comboBR;
 
+    // gyro
     public static AHRS ahrs;
 
 
@@ -62,16 +68,20 @@ public class Chassis extends SubsystemBase {
 
     public Chassis() {
 
-        try {
-            chassisWriter = new FileWriter(new File("/home/lvuser/accelerations.csv"));
-            chassisWriter.append("accelX, accelY, accelZ, pitch, roll, yaw \n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // logging start
+        // commented out normally
+//        try {
+//            chassisWriter = new FileWriter(new File("/home/lvuser/accelerations.csv"));
+//            chassisWriter.append("accelX, accelY, accelZ, pitch, roll, yaw \n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
+        // gyro init
         ahrs = new AHRS(SPI.Port.kMXP);
         ahrs.calibrate();
 
+        // config all the swerve modules
         drive0 = new WPI_TalonFX(Constants.DRIVE_FL_ID);
         drive1 = new WPI_TalonFX(Constants.DRIVE_BL_ID);
         drive2 = new WPI_TalonFX(Constants.DRIVE_FR_ID);
@@ -89,11 +99,7 @@ public class Chassis extends SubsystemBase {
     }
 
 
-
-    public void resetHeading() {
-        ahrs.reset();
-    }
-
+    // pass gyro data for uploading
     public String getGyroData() {
         String retString = "";
         retString += ahrs.getRawAccelX() + ",";
@@ -117,13 +123,15 @@ public class Chassis extends SubsystemBase {
 
         // convenience for negating
         double rot = rot_temp;
-        // happens when we swap modules out, be careful
-        // nvm encoders off 180
+        // sometimes happens if we align the modules up wrong, easier to just fix in here than redo
 
+        // get new values
         new SwerveCalcs(fwd, str, rot);
 
+        // driving ratio to tweak or go "Turbo Mode"
         double ratio = 1.0;
 
+        // assign new calc values
         double speedFL = 0;
         double speedBL = 0;
         double speedFR = 0;
@@ -138,7 +146,7 @@ public class Chassis extends SubsystemBase {
             e.printStackTrace();
         }
 
-
+        // cap wheel speeds by finding max and adjusting all others down
         double maxWheelSpeed = max(max(speedFL, speedBL), max(speedFR, speedBR));
 
         if (maxWheelSpeed > Constants.MAX_SPEED) {
@@ -147,16 +155,16 @@ public class Chassis extends SubsystemBase {
             ratio = 1.0;
         }
 
-
+        // pass all values to motors
         this.comboFL.passArgs(ratio * speedFL, getAngle(fwd, str, rot, 0));
         this.comboBL.passArgs(ratio * speedBL, getAngle(fwd, str, rot, 1));
         this.comboFR.passArgs(ratio * speedFR, getAngle(fwd, str, rot, 2));
         this.comboBR.passArgs(ratio * speedBR, getAngle(fwd, str, rot, 3));
 
-
-
     }
 
+    // does the same calcs but passes a velocity of 0
+    // used to align the modules in auton
     public void solveAngles(double fwd, double str, double rot) {
 
         new SwerveCalcs(fwd, str, rot);
@@ -196,6 +204,7 @@ public class Chassis extends SubsystemBase {
 
     }
 
+    // get the data for logging
     public String getData() {
         String ret_string = "";
 
@@ -213,6 +222,7 @@ public class Chassis extends SubsystemBase {
         return  ret_string;
     }
 
+    // feed all the motors
     public void feedAll() {
         drive0.feed();
         drive1.feed();
@@ -224,6 +234,7 @@ public class Chassis extends SubsystemBase {
         axis3.feed();
     }
 
+    // toggle Drive motor brakes
     public void toggleBrakes() {
         if (isBraking) {
             drive0.setNeutralMode(NeutralMode.Coast);

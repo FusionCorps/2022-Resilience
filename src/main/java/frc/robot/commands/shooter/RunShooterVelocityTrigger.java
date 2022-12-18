@@ -22,9 +22,7 @@ public class RunShooterVelocityTrigger extends CommandBase {
     Chassis mChassis;
     NetworkTable limelightTable;
 
-    boolean isSpunUp = false;
-
-    Timer mTimer = new Timer();
+    // Running the shooter but using the trigger instead
 
     private SlewRateLimiter fwdLimiter = new SlewRateLimiter(2.5);
 
@@ -38,24 +36,26 @@ public class RunShooterVelocityTrigger extends CommandBase {
 
     @Override
     public void initialize() {
-        mTimer.reset();
-        mTimer.start();
+
     }
 
     @Override
     public void execute() {
 
+        // increment decrement shooter speed from d-pad
         mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
         if (mController.getPOV() == 90) {
             mShooter.shootK += 0.001;
         } else if (mController.getPOV() == 270) {
             mShooter.shootK -= 0.001;
         }
+
+        // pass to ShuffleBoard
         mShooter.shootKTab.setDouble(mShooter.shootK);
 
+        // run shoot command on LeftTrigger
         if (mController.getLeftTriggerAxis() > 0.7) {
 
-            // TODO: Make this limelight dependent
 
             double axis0 = mController.getRawAxis(0);
             double axis1 = mController.getRawAxis(1);
@@ -68,21 +68,9 @@ public class RunShooterVelocityTrigger extends CommandBase {
             double ty = limelightTable.getEntry("ty").getDouble(0.0);
 
             mShooter.shootK = mShooter.shootKTab.getDouble(1.0);
-//        mShooter.shootK = SmartDashboard.getNumber("DB/Slider 0", 1.0);
 
-//            double temp = 0.48 - 0.0085*ty + 0.3*fwd;
-            // double temp = 0.49 - 0.009*ty; if battery low
-
-            // TODO: write code dependent on voltage instead
-
-
-            // shoot k 0.95 above 1.00 below
-
-//            double v_calc = 0.476 - 0.00837 * ty + 0.015 * abs(str);
-//        double v_calc = 0.969*(10618 + -219*ty + 5.29*pow(ty,2) + 0.532*pow(ty,3));
-
-            // wrong command chucklenuts
-            // TODO: WRONG COMMAND CHUCKLENUTS
+            // TODO: WRONG COMMAND
+            // haha yeah this is deprecated
             double v_calc = 1*(9248 - 107.4*ty);
 
             mShooter.target_velocity = mShooter.shootK * v_calc;

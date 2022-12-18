@@ -5,6 +5,8 @@ import frc.robot.subsystems.Shooter;
 
 public class MinusSpeed extends InstantCommand {
 
+    // removes speed from the shooter
+
     Shooter mShooter;
 
     public MinusSpeed(Shooter shooter) {

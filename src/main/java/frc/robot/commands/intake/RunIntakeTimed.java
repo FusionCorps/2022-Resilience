@@ -10,7 +10,8 @@ import static frc.robot.RobotContainer.mController;
 
 public class RunIntakeTimed extends CommandBase {
 
-    private SlewRateLimiter indexLimit = new SlewRateLimiter(5.0);
+    // run intake during auton
+
     Intake mIntake;
     double mTime;
 
@@ -34,9 +35,6 @@ public class RunIntakeTimed extends CommandBase {
     @Override
     public void execute() {
         mIntake.runIntake(mPct);
-//        System.out.println(indexLimit.calculate(
-//                (mController.getRightTriggerAxis() - mController.getLeftTriggerAxis())
-//                        * Constants.INDEXER_TARGET));
     }
 
     @Override

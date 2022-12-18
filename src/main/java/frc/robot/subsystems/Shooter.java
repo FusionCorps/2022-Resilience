@@ -14,10 +14,14 @@ import static frc.robot.Constants.Shooter.*;
 
 public class Shooter extends SubsystemBase {
 
+    // Shooter subsystem
+
     WPI_TalonFX shooter0;
 
+    // fudge factor
     public double shootK = 1.0;
 
+    // targeting stuff, could be handled much better with abs(vel - target_vel)
     public double target;
     public double target_velocity;
 

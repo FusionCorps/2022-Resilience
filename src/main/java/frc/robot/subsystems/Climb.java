@@ -10,6 +10,8 @@ import static frc.robot.Constants.Climb.*;
 
 public class Climb extends SubsystemBase {
 
+    // one set of arms is actuated, everything else is passive
+
     // two synced motors
     WPI_TalonFX climb0;
     WPI_TalonFX climb1;
@@ -52,7 +54,7 @@ public class Climb extends SubsystemBase {
         climb0.config_kD(0, CLIMB_kD);
 
         // servo setup
-        servo_l = new Servo(0);
+        servo_l = new Servo(SERVO_L_ID);
         servo_r = new Servo(SERVO_R_ID);
 
         servo_l.setAngle(52);
@@ -64,11 +66,7 @@ public class Climb extends SubsystemBase {
         climb0.set(pct);
     }
 
-    public void setLeftServoAngle(double angle) {
-        servo_l.setAngle(angle);
-        servo_r.setAngle(162-angle);
-    }
-
+    // set both servo angles, used to tune
     public void setServoAngles(double left, double right) {
         servo_l.setAngle(left);
         servo_r.setAngle(right);
@@ -81,7 +79,8 @@ public class Climb extends SubsystemBase {
 
     public int getClimbPosKey() {
 
-        // TODO" make this enum
+        // get a integer key for the climb state
+        // might be better to handle with Strings to increase readability
 
         int key;
 
@@ -105,6 +104,7 @@ public class Climb extends SubsystemBase {
         return key;
     }
 
+    // get and set on encoder w/ PID
     public double getClimbPos() {
         return climb0.getSelectedSensorPosition();
     }

@@ -6,6 +6,8 @@ import frc.robot.subsystems.Shooter;
 
 public class RevShooterManage extends CommandBase {
 
+    // command to set shooter to spin up while aiming
+
     Shooter mShooter;
     Chassis mChassis;
 

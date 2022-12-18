@@ -10,6 +10,11 @@ import static frc.robot.RobotContainer.mController;
 
 public class RunSwerveJoystick extends CommandBase {
 
+    // original class
+    // used for driving without FC
+
+    // now is handled in a Toggle Command
+
     Chassis mChassis;
 
     public RunSwerveJoystick(Chassis chassis) {
@@ -17,10 +22,10 @@ public class RunSwerveJoystick extends CommandBase {
         this.addRequirements(mChassis);
     }
 
-    private SlewRateLimiter limiter = new SlewRateLimiter(2.5);
 
     @Override
     public void execute() {
+        // pass args to swerve modules
         try {
             mChassis.runSwerve(mController.getRawAxis(1),
                     -mController.getRawAxis(0),

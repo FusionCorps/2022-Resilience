@@ -7,6 +7,7 @@ public class IndexerToggle extends InstantCommand {
 
     Indexer mIndexer;
 
+    // toggle on/off automated indexing
     public IndexerToggle(Indexer indexer) {
         mIndexer = indexer;
         addRequirements(mIndexer);

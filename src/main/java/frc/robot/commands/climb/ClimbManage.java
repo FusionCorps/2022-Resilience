@@ -11,6 +11,9 @@ import static java.lang.Math.abs;
 
 public class ClimbManage extends CommandBase {
 
+    // allows climb to spool out between attempts
+    // when Paused, climb is put into brake mode. used to pull the robot up in a controlled manner
+
     Climb mClimb;
 
     public ClimbManage(Climb climb) {
@@ -28,26 +31,23 @@ public class ClimbManage extends CommandBase {
         int key;
         key = mClimb.getClimbPosKey();
 
-//        if (mClimb.isClosed) {
-//            mClimb.setServoAngles(52, 130);
-//        } else {
-//            mClimb.setServoAngles(115, 52);
-//        }
 
-
-
+        // brake if paused
         if (mClimb.isPause) {
             mClimb.setClimb(0.0);
         } else {
+            // slow release to ensure that robot does not just drop onto the bar
             if (key == 0) {
-                // TODO: is this how I should handle this
                 mClimb.setClimb(0.1);
+            // originally these were all different but after testing we decided that it was just best
+            // if our driver could just shoot the arms out as fast as possible
             } else if (key == 1) {
                 mClimb.setClimb(0.95);
             } else if (key == 2) {
                 mClimb.setClimb(0.95);
             } else if (key == 3) {
                 mClimb.setClimb(0.95);
+            // prevent spool wrap-around at the top of the climb
             } else {
                 mClimb.setClimbPos(CLIMB_MAX_POS + 0.25*2048);
             }

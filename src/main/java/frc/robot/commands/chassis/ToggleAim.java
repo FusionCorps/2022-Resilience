@@ -5,6 +5,9 @@ import frc.robot.subsystems.Chassis;
 
 public class ToggleAim  extends InstantCommand {
 
+    // toggles a boolean in the Chassis subsystem
+    // default command checks for that and toggle aiming on/off
+
     Chassis mChassis;
 
     public ToggleAim(Chassis chassis) {

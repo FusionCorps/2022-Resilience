@@ -10,13 +10,12 @@ public class ClimbServoActuateFree extends CommandBase {
 
     public ClimbServoActuateFree(Climb climb) {
         mClimb = climb;
-//        addRequirements(mClimb);
     }
 
     @Override
     public void initialize() {
+        // sees current state and swap opposite
         if (mClimb.isClosed) {
-            System.out.println("Opening");
             mClimb.setServoAngles(115, 52);
         } else {
             mClimb.setServoAngles(52, 130);
@@ -25,9 +24,10 @@ public class ClimbServoActuateFree extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("done");
+        // swap state
         mClimb.isClosed = !mClimb.isClosed;
         if (!mClimb.isClosed) {
+            // avoids breaking the Servo motors on glancing collisions while open.
             mClimb.setServoFree();
         }
     }

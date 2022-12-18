@@ -3,9 +3,11 @@ package frc.robot.commands.climb;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climb;
 
-import static frc.robot.Constants.Climb.CLIMB_MIN_POS;
 
 public class ClimbActivate extends CommandBase {
+
+    // simple command to pull the climb arm down
+    // would most likely benefit from some form of PID control
 
     Climb mClimb;
 
@@ -16,9 +18,10 @@ public class ClimbActivate extends CommandBase {
 
     @Override
     public void execute() {
+        // check to make sure that climb is not below minimum allowed position
         int key = mClimb.getClimbPosKey();
 
-
+        // force climb above minimum, else just pull climb down
         if (key == 0) {
             mClimb.setClimb(0.1);
         } else {

@@ -81,7 +81,7 @@ public class FieldCentricRecord extends CommandBase {
         angle = -(mChassis.ahrs.getAngle() % 360);
 
 
-
+        // drive robot normally
         double axis0 = responseCurve.calculate(mController.getRawAxis(0));
         double axis1 = responseCurve.calculate(mController.getRawAxis(1));
         double axis4 = responseCurve.calculate(mController.getRawAxis(4));
@@ -92,8 +92,9 @@ public class FieldCentricRecord extends CommandBase {
                     rotLimiter.calculate(mController.getRawAxis(4)));
         } catch (Exception e) {
         }
-//        System.out.println("Trying to drive");
 
+
+        // write data to CSV file
         try {
             cWriter.append(mChassis.getData() + "\n");
         } catch (IOException e) {

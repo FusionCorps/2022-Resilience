@@ -6,6 +6,7 @@ import frc.robot.subsystems.Indexer;
 
 public class IndexerManageTimed extends CommandBase {
 
+    // run Indexer during auton
     Indexer mIndexer;
 
     Timer mTimer = new Timer();

@@ -5,6 +5,8 @@ import frc.robot.subsystems.Chassis;
 
 public class ToggleGyro extends InstantCommand {
 
+    // Toggles whether or not Gyro is used by RunFieldCentricSwerve.java
+
     Chassis mChassis;
 
     public ToggleGyro(Chassis chassis) {

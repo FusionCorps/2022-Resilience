@@ -6,10 +6,10 @@ import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Indexer;
 
 public class IndexerBurst extends CommandBase {
-    // TODO: Make command that aligns wheels w/o movement overall
 
+    // run indexer at a certain speed for a certain time
+    // mostly used for auton and testing
     Indexer mIndexer;
-
 
     double mTime;
 

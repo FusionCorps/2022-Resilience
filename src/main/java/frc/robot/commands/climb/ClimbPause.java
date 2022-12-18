@@ -5,6 +5,8 @@ import frc.robot.subsystems.Climb;
 
 public class ClimbPause extends InstantCommand {
 
+    // simple toggle function, pretty self-explanatory
+
     Climb mClimb;
 
     public ClimbPause(Climb climb) {

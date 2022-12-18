@@ -17,6 +17,8 @@ public class ResetGyro extends InstantCommand {
 
     }
 
+    // reset gyro angle, etc.
+    // resetDisplacement is most likely unnecessary
     @Override
     public void initialize() {
         System.out.println("Trying to Reset");

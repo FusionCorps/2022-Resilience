@@ -71,9 +71,7 @@ public class RobotContainer {
        // toggle climb servo locks on LB
         new JoystickButton(mController, XboxController.Button.kLeftBumper.value)
                 .whileHeld(new ClimbServoActuateFree(mClimb));
-//        new JoystickButton(mController, XboxController.Button.kRightBumper.value)
-//                .whileHeld(new ClimbManage(mClimb));
-        // Start/Back control Climb
+        // climb controls on start and back
         new JoystickButton(mController, XboxController.Button.kStart.value)
                 .whileHeld(new ClimbActivate(mClimb));
         new JoystickButton(mController, XboxController.Button.kBack.value)

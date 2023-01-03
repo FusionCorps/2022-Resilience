@@ -134,5 +134,9 @@ public class SwerveCombo {
         );
     }
 
+    public void passState(SwerveModuleState state) {
+        this.passArgs(state.speedMetersPerSecond, -1*state.angle.getRadians() + PI);
+    }
+
 
 }

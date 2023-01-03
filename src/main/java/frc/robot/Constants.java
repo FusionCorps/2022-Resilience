@@ -44,14 +44,14 @@ public class Constants {
     public static double DRIVE_kF = 0.0;
     public static double DRIVE_kP = 0.07;
     public static double DRIVE_kI = 0.0;
-    public static double DRIVE_kD = 0.60;
+    public static double DRIVE_kD = 0.00;
 
     // The driving ratio is screwed up since we swapped module gearing but no one told me
     // and I didn't want to rewrite all the auton
     public static double STEERING_RATIO = 12.8;
     public static double DRIVING_RATIO = 6.86*6.86/6.75*1.25;
 
-    public static double DRIVE_RATIO_TRUE = 6.78;
+    public static double DRIVE_RATIO_TRUE = 6.75;
 
     public static double WHEEL_RADIUS_METERS = 0.0508;
 

@@ -4,19 +4,26 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.math.SwerveCalcs;
@@ -286,5 +293,45 @@ public class Chassis extends SubsystemBase {
         m_field.setRobotPose(m_odometry.getPoseMeters());
     }
 
+    public void resetOdometry(Pose2d pose) {
+        m_odometry.resetPosition(pose, ahrs.getRotation2d());
+    }
+
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+    }
+
+    // custom swerve is different than convention: speeds must be negated
+    public void setModuleStates(SwerveModuleState[] desired) {
+//        comboFL.passArgs(-1*desired[0].speedMetersPerSecond, desired[0].angle.getRadians());
+//        comboFR.passArgs(-1*desired[1].speedMetersPerSecond, desired[1].angle.getRadians());
+//        comboBL.passArgs(-1*desired[2].speedMetersPerSecond, desired[2].angle.getRadians());
+//        comboBR.passArgs(-1*desired[3].speedMetersPerSecond, desired[3].angle.getRadians());
+        comboFL.passState(desired[0]);
+        comboFR.passState(desired[1]);
+        comboBL.passState(desired[2]);
+        comboBR.passState(desired[3]);
+    }
+
+    public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFirstPath) {
+        return new SequentialCommandGroup(
+                new InstantCommand(() -> {
+                    // Reset odometry for the first path you run during auto
+                    if(isFirstPath){
+                        this.resetOdometry(traj.getInitialHolonomicPose());
+                    }
+                }),
+                new PPSwerveControllerCommand(
+                        traj,
+                        this::getPose, // Pose supplier
+                        this.m_kinematics, // SwerveDriveKinematics
+                        new PIDController(1, 0, 0), // X controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
+                        new PIDController(1, 0, 0), // Y controller (usually the same values as X controller)
+                        new PIDController(0, 0, 0), // Rotation controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
+                        this::setModuleStates, // Module states consumer
+                        this // Requires this drive subsystem
+                )
+        );
+    }
 
 }

@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.PathConstraints;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cscore.VideoMode;
@@ -98,7 +101,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // pick the right auton here
-    m_autonomousCommand = m_autonomousTwoBallWallShorter;
+    PathPlannerTrajectory examplePath = PathPlanner.loadPath("test_line", new PathConstraints(8, 5));
+
+    m_autonomousCommand = mChassis.followTrajectoryCommand(examplePath, true);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

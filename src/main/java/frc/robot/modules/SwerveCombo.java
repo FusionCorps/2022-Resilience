@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.Constants;
 import frc.robot.math.SwerveCalcs;
 
@@ -125,7 +127,12 @@ public class SwerveCombo {
         this.axisMotor.set(ControlMode.Velocity, 0);
     }
 
-
+    public SwerveModuleState getState() {
+        return new SwerveModuleState(
+                -driveMotor.getSelectedSensorVelocity()*10/2048*2*PI*WHEEL_RADIUS_METERS/DRIVE_RATIO_TRUE,
+                new Rotation2d(coder.getAbsolutePosition()/180*PI)
+        );
+    }
 
 
 }

@@ -4,9 +4,19 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.math.SwerveCalcs;
@@ -17,6 +27,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static frc.robot.Constants.TRACK_LENGTH_METERS;
+import static frc.robot.Constants.TRACK_WIDTH_METERS;
 import static frc.robot.math.SwerveCalcs.*;
 import static java.lang.Double.max;
 
@@ -60,11 +72,23 @@ public class Chassis extends SubsystemBase {
     public SwerveCombo comboBR;
 
     // gyro
-    public static AHRS ahrs;
+    public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
+    // shoutout Ri3D Redux for reminding me I had to do this at some point
+    private final Translation2d m_frontLeftLocation = new Translation2d(TRACK_WIDTH_METERS / 2.0, TRACK_LENGTH_METERS / 2.0);
+    private final Translation2d m_frontRightLocation = new Translation2d(TRACK_WIDTH_METERS / 2.0, -TRACK_LENGTH_METERS / 2.0);
+    private final Translation2d m_backLeftLocation = new Translation2d(-TRACK_WIDTH_METERS / 2.0, TRACK_LENGTH_METERS / 2.0);
+    private final Translation2d m_backRightLocation = new Translation2d(-TRACK_WIDTH_METERS / 2.0, -TRACK_LENGTH_METERS / 2.0);
 
+    private final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(
+            m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
+    private final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
+            m_kinematics,
+            ahrs.getRotation2d(),
+            new Pose2d(5, 5, ahrs.getRotation2d()));
 
+    Field2d m_field;
 
     public Chassis() {
 
@@ -77,9 +101,10 @@ public class Chassis extends SubsystemBase {
 //            e.printStackTrace();
 //        }
 
+        m_field = new Field2d();
+
         // gyro init
-        ahrs = new AHRS(SPI.Port.kMXP);
-        ahrs.calibrate();
+        // ahrs.calibrate();
 
         // config all the swerve modules
         drive0 = new WPI_TalonFX(Constants.DRIVE_FL_ID);
@@ -96,6 +121,8 @@ public class Chassis extends SubsystemBase {
         comboBL = new SwerveCombo(axis1, drive1, coder1, 1);
         comboFR = new SwerveCombo(axis2, drive2, coder2, 2);
         comboBR = new SwerveCombo(axis3, drive3, coder3, 3);
+
+        SmartDashboard.putData("Field", m_field);
     }
 
 
@@ -249,6 +276,14 @@ public class Chassis extends SubsystemBase {
             drive3.setNeutralMode(NeutralMode.Brake);
         }
         isBraking = !isBraking;
+    }
+
+    @Override
+    public void periodic() {
+        m_odometry.update(ahrs.getRotation2d(), comboFL.getState(), comboFR.getState(), comboBL.getState(),
+                comboBR.getState());
+
+        m_field.setRobotPose(m_odometry.getPoseMeters());
     }
 
 
